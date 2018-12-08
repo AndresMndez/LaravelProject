@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Http\Resources\CategoryCollection;
 use App\Product;
-use App\Http\Resources\ProductsCollection;
+use App\Http\Resources\ProductCollection;
 use App\User;
 use App\Http\Resources\UserCollection;
 
@@ -15,7 +15,7 @@ class ApiController extends Controller
 {
 	public static function products()
 	{
-		return  new ProductsCollection(Product::all());
+		return  new ProductCollection(Product::all());
 	}
 
 	public static function categories()

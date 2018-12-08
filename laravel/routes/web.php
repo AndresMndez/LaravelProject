@@ -11,6 +11,11 @@
 |
 */
 
+Route::get('api/categories','ApiController@categories');
+Route::get('api/products','ApiController@products');
+Route::get('api/users','ApiController@users');
+Route::get('api/prodcat','ApiController@categoriesAndProducts');
+
 Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
 

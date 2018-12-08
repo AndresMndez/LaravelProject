@@ -2,7 +2,7 @@
     <div class="logo">
         <p>LOGO</p>
     </div>
-    
+
     <div class="contact">
         <div class="contact-info">
             <i class="fa fa-phone" aria-hidden="true"></i>
@@ -16,15 +16,15 @@
                 <input type="text" name="product" placeholder="buscador de productos">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
-        </div>    
+        </div>
     </div>
-   
+
    <div class="amount-bar">
         <i class="fas fa-cart-plus"></i>
-        <p><?php
+        <!--<p><?php/*
         setlocale(LC_MONETARY, 'en_US');
         echo money_format('%(#10n', $precioFinal);
-        ?></p>
+        */?></p>-->
         <i class="fas fa-heart"></i>
     </div>
 
