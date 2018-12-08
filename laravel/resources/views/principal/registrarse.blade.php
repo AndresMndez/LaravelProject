@@ -33,7 +33,7 @@
 					<p> <span> <?php echo  (isset($error["tel"]))? $error["tel"]: ""; ?></span> </p>
 				</div>
 				<div class="dato_interno">
-					<i class="fas fa-images"></i>
+					<i class="fas fa-storage/images"></i>
 					<input type="file" name="avatar">
 					<p> <span> <?php echo  (isset($error["size"]))? $error["size"]: ""; ?> </span> </p>
 				</div>

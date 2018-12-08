@@ -26,7 +26,7 @@
 						</section>
 
 					@endforeach
-						{{$categories->links()}}
+						{{--$categories->links()--}}
 				</div>
 
 
