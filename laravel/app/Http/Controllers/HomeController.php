@@ -27,6 +27,6 @@ class HomeController extends Controller
     {
       $categories=Category::all();
       $products=Product::all();
-      return view('principal/home',compact('categories','products'));
+      return view('principal.index',compact('categories','products'));
     }
 }

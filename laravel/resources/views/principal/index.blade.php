@@ -16,7 +16,7 @@ $precioFinal = 0;
         @include('principal/blocks/menu')
 
 
-        <div class="banner"> <img src="{{$banner->url}}"></div>
+        <div class="banner"> <img src=""></div>
         <div class = "content">
 
             <!-- ASIDE MENU -->
