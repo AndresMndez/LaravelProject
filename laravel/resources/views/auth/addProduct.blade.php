@@ -25,7 +25,7 @@
 		</form>
 		<script type="text/javascript" >
 			info = new XMLHttpRequest();
-			url ="http://127.0.0.1:8000/api/categoryproduct";
+			url ="http://127.0.0.1:8000/api/prodcat";
 			var c;
 			input=document.getElementsByTagName('input');
 			info.onreadystatechange = function() {

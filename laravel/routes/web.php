@@ -13,8 +13,12 @@
 
 Route::get('api/categories','ApiController@categories');
 Route::get('api/products','ApiController@products');
-Route::get('api/users','ApiController@users');
+Route::post('api/users','ApiController@users');
 Route::get('api/prodcat','ApiController@categoriesAndProducts');
+
+Route::get('admin/addProduct','AdminController@addProduct');
+Route::get('admin/catalog','AdminController@catalog');
+Route::get('admin/index','AdminController@index');
 
 Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();

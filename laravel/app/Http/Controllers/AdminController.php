@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-	public static function loadProductsCategories()
+	public static function addProduct()
 	{
 		$var = 'Add Products & Categories';
-		return view('auth/loadProductsCategories',['var' => $var]);
+		return view('auth/addProduct',['var' => $var]);
 	}
 
 	public static function catalog()
