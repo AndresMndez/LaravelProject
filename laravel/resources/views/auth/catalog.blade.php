@@ -21,50 +21,60 @@
 				<option value=""></option>
 			</select>
 		</div>
-		<table>
-			<tbody>
-				<tr>
-					<th>Product1</th>
-					<th>Categorie2</th>
-					<th>Brand3</th>
-					<th>Price4</th>
-					<th>Description5</th>
-					<th>Image6</th>
-					<th>Update7</th>
-					<th>Delete8</th>
-				</tr>
-			</tbody>
-		</table>
+		<div class="">
+		</div>
 		<script>
 			info = new XMLHttpRequest();
-			url ="http://127.0.0.1:8000/api/categoryproduct";
+			url ="http://127.0.0.1:8000/api/prodcat";
 			var c;
+			var d=new Date();
+			year=d.getFullYear();
+			month=d.getMonth()+1;
+			day=d.getDate();
 			select=document.getElementsByTagName('select');
-			tbody=document.getElementsByTagName('tbody');
+			div=document.getElementsByTagName('div');
 			info.onreadystatechange = function() {
 				if (info.readyState == 4 && info.status == 200){
 					c=JSON.parse(info.responseText);
 					c=c.data;
 					for (var i = 0;i<c.length;i++){
-						// if (i==0){
-						// 	select[0].innerHTML="<option value='"+c[i]["id"]+"'>"+c[i]["name"]+"</option>";
-						// } else {
-							select[0].innerHTML+="<option value="+c[i]["id"]+">"+c[i]["name"]+"</option>";
+						select[0].innerHTML+="<option value="+c[i]["id"]+">"+c[i]["name"]+"</option>";
 				 	}
 					for (i=0;i<c.length;i++){
-						for (var x=0;x<c[i]['products'].length;x++){
-							if(select[1].innerHTML.indexOf(c[i]["products"][x]["brand"])==-1){select[1].innerHTML+="<option value="+c[i]["products"][x]["id"]+">"+c[i]["products"][x]["brand"]+"</option>";}
-							if(select[2].innerHTML.indexOf(c[i]["products"][x]["price"])==-1){select[2].innerHTML+="<option value="+c[i]["products"][x]["id"]+">"+c[i]["products"][x]["price"]+"</option>";}
-							if(select[3].innerHTML.indexOf(c[i]["products"][x]["name"])==-1){select[3].innerHTML+="<option value="+c[i]["products"][x]["id"]+">"+c[i]["products"][x]["name"]+"</option>";}
-							tbody[0].innerHTML+="<tr><td>"+c[i]["products"][x]["name"]+"</td><td>"+c[i]["name"]+"</td><td>"+c[i]["products"][x]["brand"]+"</td><td>"+c[i]["products"][x]["price"]+"</td><td>"+c[i]["products"][x]["description"]+"</td><td><img src=\'"+c[i]["products"][x]["image"]+"\' width=20px> </td><td><i class='fas fa-edit'></i></td><td><i class='fas fa-trash-alt'></i></td></tr>";
+						//Recorro el json para traer los productos y las selecciones de filtros
+						repeticion(i);
 						}
 					}
 				}
-			}
+
 			info.open("get",url,true);
 			info.send();
-
-
+			select[0].onchange=function (){
+				if(this.value!=""){
+					for (i=0;i<c.length;i++){
+						if (i==select[0].value-1){
+							div[5].innerHTML="";
+							select[1].innerHTML="<option value=></option>";
+							select[2].innerHTML="<option value=></option>";
+							select[3].innerHTML="<option value=></option>";
+							repeticion(i);
+							}
+						}
+				} else {
+					for (i=0;i<c.length;i++){
+						repeticion(i);
+					}
+				}
+			}
+			/*Pasa por todos los valores de la variable e imprime en el div*/
+			function repeticion(i){
+				for (var x=0;x<c[i]['products'].length;x++){
+					if(select[1].innerHTML.indexOf(c[i]["products"][x]["brand"])==-1){select[1].innerHTML+="<option value="+c[i]["products"][x]["id"]+">"+c[i]["products"][x]["brand"]+"</option>";}
+					if(select[2].innerHTML.indexOf(c[i]["products"][x]["price"])==-1){select[2].innerHTML+="<option value="+c[i]["products"][x]["id"]+">"+c[i]["products"][x]["price"]+"</option>";}
+					if(select[3].innerHTML.indexOf(c[i]["products"][x]["name"])==-1){select[3].innerHTML+="<option value="+c[i]["products"][x]["id"]+">"+c[i]["products"][x]["name"]+"</option>";}
+					div[5].innerHTML+="<form method='get' action='/prueba' enctype='multipart/form-data'><input type='hidden' value="+c[i]["products"][x]["id"]+" name='id'> <input type='text' value='"+c[i]["products"][x]["name"]+"' name='product'><input type='text' value='"+c[i]["name"]+"' name='categoryname'><input  type='text' value='"+c[i]["products"][x]["brand"]+"' name='brand'><input type='number' value="+c[i]["products"][x]["price"]+" name='price'><input type='text' value="+c[i]["products"][x]["description"]+" name='description'><img src=\'"+c[i]["products"][x]["image"]+"\' width=20px height=24px > <input type='checkbox' name='update' value='update'> <input type='checkbox' name='delete' value='"+year+"-"+month+"-"+day+"'> <i class='fas fa-trash-alt'></i><button type='submit' name='submit' value='submit' disabled>Submit</button></form>";
+				}
+			}
 		</script>
 	</main>
 @endsection

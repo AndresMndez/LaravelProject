@@ -25,10 +25,17 @@ class AdminController extends Controller
 		return view('auth/index',['var'=>$var]);
 	}
 
-	public static function show(Request $request,$id)
+	public static function save(Request $request)
 	{
-		$value = $request->session()->get('key');
-		dd($request);
-		return view('principal/prueba');
+		$value = $request;
+		dd($value);
+		$var='Catalog';
+		return view('auth/catalog',['var'=>$var]);
+	}
+
+	public static function users()
+	{
+		$var='Users Existance';
+		return view('auth/users',['var'=>$var]);
 	}
 }
