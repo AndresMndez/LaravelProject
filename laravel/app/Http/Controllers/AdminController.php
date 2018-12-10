@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
@@ -22,5 +23,12 @@ class AdminController extends Controller
 	{
 		$var = 'My Admin page';
 		return view('auth/index',['var'=>$var]);
+	}
+
+	public static function show(Request $request,$id)
+	{
+		$value = $request->session()->get('key');
+		dd($request);
+		return view('principal/prueba');
 	}
 }
