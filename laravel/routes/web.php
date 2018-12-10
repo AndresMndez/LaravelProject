@@ -16,7 +16,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', 'Auth\LoginController@logout');
-Route::get('/sabe','AdminController@show');
+Route::get('/save','AdminController@save');
 
 Route::get('/api/categories','ApiController@categories');
 Route::get('/api/products','ApiController@products');

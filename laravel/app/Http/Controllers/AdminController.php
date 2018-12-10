@@ -27,10 +27,18 @@ class AdminController extends Controller
 
 	public static function save(Request $request)
 	{
-		$value = $request;
-		dd($value);
+		$product=\App\Product::find($request->id);
+		$product->name=$request->product;
+		$product->description=$request->description;
+		$product->brand=$request->brand;
+		$product->price=$request->price;
+		if ($request->delete){
+			$product->delete_at=$request->delete;
+		}
+		$product->save();
+		$saved="It saved your changes";
 		$var='Catalog';
-		return view('auth/catalog',['var'=>$var]);
+		return view('auth/catalog',['var'=>$var],['saved'=>$saved]);
 	}
 
 	public static function users()

@@ -2,6 +2,9 @@
 
 @section('main')
 	<main>
+		@if (isset($saved))
+			{{$saved}}
+		@endif
 		<div class="">
 			<h2>Filters</h2>
 			<label for="categories">Category</label>
@@ -28,6 +31,7 @@
 			url ="http://127.0.0.1:8000/api/prodcat";
 			var c;
 			var d=new Date();
+			forms=document.getElementsByTagName('form');
 			year=d.getFullYear();
 			month=d.getMonth()+1;
 			day=d.getDate();
@@ -46,7 +50,6 @@
 						}
 					}
 				}
-
 			info.open("get",url,true);
 			info.send();
 			select[0].onchange=function (){
@@ -69,10 +72,12 @@
 			/*Pasa por todos los valores de la variable e imprime en el div*/
 			function repeticion(i){
 				for (var x=0;x<c[i]['products'].length;x++){
-					if(select[1].innerHTML.indexOf(c[i]["products"][x]["brand"])==-1){select[1].innerHTML+="<option value="+c[i]["products"][x]["id"]+">"+c[i]["products"][x]["brand"]+"</option>";}
-					if(select[2].innerHTML.indexOf(c[i]["products"][x]["price"])==-1){select[2].innerHTML+="<option value="+c[i]["products"][x]["id"]+">"+c[i]["products"][x]["price"]+"</option>";}
-					if(select[3].innerHTML.indexOf(c[i]["products"][x]["name"])==-1){select[3].innerHTML+="<option value="+c[i]["products"][x]["id"]+">"+c[i]["products"][x]["name"]+"</option>";}
-					div[5].innerHTML+="<form method='get' action='/prueba' enctype='multipart/form-data'><input type='hidden' value="+c[i]["products"][x]["id"]+" name='id'> <input type='text' value='"+c[i]["products"][x]["name"]+"' name='product'><input type='text' value='"+c[i]["name"]+"' name='categoryname'><input  type='text' value='"+c[i]["products"][x]["brand"]+"' name='brand'><input type='number' value="+c[i]["products"][x]["price"]+" name='price'><input type='text' value="+c[i]["products"][x]["description"]+" name='description'><img src=\'"+c[i]["products"][x]["image"]+"\' width=20px height=24px > <input type='checkbox' name='update' value='update'> <input type='checkbox' name='delete' value='"+year+"-"+month+"-"+day+"'> <i class='fas fa-trash-alt'></i><button type='submit' name='submit' value='submit' disabled>Submit</button></form>";
+					if(!c[i]["products"][x]["delete_at"]){
+						if(select[1].innerHTML.indexOf(c[i]["products"][x]["brand"])==-1){select[1].innerHTML+="<option value="+c[i]["products"][x]["id"]+">"+c[i]["products"][x]["brand"]+"</option>";}
+						if(select[2].innerHTML.indexOf(c[i]["products"][x]["price"])==-1){select[2].innerHTML+="<option value="+c[i]["products"][x]["id"]+">"+c[i]["products"][x]["price"]+"</option>";}
+						if(select[3].innerHTML.indexOf(c[i]["products"][x]["name"])==-1){select[3].innerHTML+="<option value="+c[i]["products"][x]["id"]+">"+c[i]["products"][x]["name"]+"</option>";}
+						div[5].innerHTML+="<form method='get' action='/save' enctype='multipart/form-data'><input type='hidden' value="+c[i]["products"][x]["id"]+" name='id'> <input type='text' value='"+c[i]["products"][x]["name"]+"' name='product'><input type='hidden' name='categoryid' value = '"+c[i]["id"]+"'><input type='text' value='"+c[i]["name"]+"' name='categoryname'><input  type='text' value='"+c[i]["products"][x]["brand"]+"' name='brand'><input type='number' value="+c[i]["products"][x]["price"]+" name='price'><input type='text' value='"+c[i]["products"][x]["description"]+"' name='description'><img src='"+c[i]["products"][x]["image"]+"' width=30px height=24px > <input type='checkbox' name='delete' value='"+year+"-"+month+"-"+day+"'> <i class='fas fa-trash-alt'></i><button type='submit' name='submit' value='submit'>Submit</button></form>";
+					}
 				}
 			}
 		</script>
