@@ -26,3 +26,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('logout', 'Auth\LoginController@logout');
 Route::get('prueba','AdminController@show');
+
+Route::get('pruebas', function () {
+    return view('admin.app');
+});
+
+Route::get('admin/catalog','AdminController@catalog');

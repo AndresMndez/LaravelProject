@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App;
 
 class AdminController extends Controller
 {
@@ -21,8 +22,9 @@ class AdminController extends Controller
 
 	public static function catalog()
 	{
-		$var = 'Catalog';
-		return view('auth/catalog',['var'=>$var]);
+		$productos = App\Product::whereNotNull('id')->paginate(10);
+
+		return view('admin.products',compact('productos'));
 	}
 
 	public static function index()

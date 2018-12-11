@@ -6,7 +6,7 @@ $precioFinal = 0;
 <html>
     <!--HEAD-->
     @include('principal/blocks/head')
-    @section('title', 'probando pagina')
+    @section('title', 'Tu mejor Sitio de Compras')
 
     <body>
         <!--HEADER-->
@@ -23,11 +23,12 @@ $precioFinal = 0;
             @include('principal/blocks/category-menu')
 
             <main>
+
                 <h1>Mejores Ofertas</h1>
 
                 <section class="best-seller">
-                    @foreach ($products as $productos)
 
+                    @foreach ($products as $productos)
                         <article class="main-seller">
                             <img src="{{$productos->image}}">
                             <div class ="product-inside">
@@ -40,13 +41,14 @@ $precioFinal = 0;
                             </div>
                         </article>
                     @endforeach
-                   
-                </section> 
+
+                </section>
 
                 <h2 class = "h2-best" style="font-family: 'Montserrat', sans-serif;">Mas    Vendidos</h2>
-                <section class="best-seller">
-                        @foreach ($products as $productos)
 
+                <section class="best-seller">
+
+                        @foreach ($products as $productos)
                         <article class="main-seller">
                             <img src="{{$productos->image}}">
                             <div class ="product-inside">
