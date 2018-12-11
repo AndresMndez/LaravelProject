@@ -19,6 +19,7 @@ Route::get('api/prodcat','ApiController@categoriesAndProducts');
 Route::get('admin/addProduct','AdminController@addProduct');
 Route::get('admin/catalog','AdminController@catalog');
 Route::get('admin/index','AdminController@index');
+Route::get('admin/users', 'AdminController@users');
 
 Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();

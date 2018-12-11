@@ -51,7 +51,7 @@ class AdminController extends Controller
 
 	public static function users()
 	{
-		$var='Users Existance';
-		return view('auth/users',['var'=>$var]);
+		$usuarios = App\User::whereNotNull('id')->paginate(10);
+		return view('admin/users',compact('usuarios'));
 	}
 }
