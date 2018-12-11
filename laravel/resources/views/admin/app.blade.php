@@ -33,10 +33,10 @@
   <body>
     <header class="header-admin">
       <ul class="nav_admin">
-          <li href="admin/catalog">Home</li>
+          <li>Home</li>
           <li>Ordenes</li>
-          <li>Productos</li>
-          <li>Usuarios</li>
+          <li href="admin/catalog">Productos</li>
+          <li href="admin/users">Usuarios</li>
       </ul>
 
     </header>
