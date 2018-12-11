@@ -35,8 +35,8 @@
       <ul class="nav_admin">
           <li>Home</li>
           <li>Ordenes</li>
-          <li href="admin/catalog">Productos</li>
-          <li href="admin/users">Usuarios</li>
+          <li href="http://127.0.0.1:8000/admin/catalog">Productos</li>
+          <li href="http://127.0.0.1:8000/admin/users">Usuarios</li>
       </ul>
 
     </header>
