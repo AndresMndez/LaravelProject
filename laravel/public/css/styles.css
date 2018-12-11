@@ -252,6 +252,12 @@ h1{
     font-weight: bold;
 }
 
+.product-add:hover {
+  text-decoration:none;
+  color:#0000cc;
+  cursor:pointer;
+}
+
 .product-add p{
     margin-left: 5px;
 }
