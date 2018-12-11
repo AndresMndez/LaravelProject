@@ -16,7 +16,7 @@
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-
+                                  <p id='name'></p>
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -30,7 +30,7 @@
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
+                                <p id='email'></p>
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -44,7 +44,7 @@
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
+                                <p id="password"></p>
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -58,12 +58,13 @@
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <p id="password_confirm"></p>
                             </div>
                         </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" disabled>
                                     {{ __('Register') }}
                                 </button>
                             </div>
@@ -74,4 +75,83 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+  input=document.getElementsByTagName('input');
+  btn=document.getElementsByTagName('button');
+  p=document.getElementsByTagName('p');
+  pmail=p['email'];
+  ppassword=p['password'];
+  pconfirm=p['password_confirm'];
+  mail=input['email'];
+  password=input['password'];
+  confirm=input['password_confirmation'];
+  var allowedmail=false;
+  var allowedpassword=false;
+  var matchespassword=false;
+  mail.oninput=function ()
+	{
+    var regexMail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!regexMail.test(mail.value))
+    {
+      pmail.innerHTML=("Not a valid Email Address");
+      pmail.style.color='red';
+      allowedmail=false;
+      accesserver();
+    } else {
+      pmail.innerHTML=("This is a Valid Email Address");
+      pmail.style.color='green';
+      allowedmail=true;
+      accesserver();
+    }
+
+	}
+  password.oninput=function(){
+    if (password.value.length<8){
+      ppassword.innerHTML="The password need at least "+(8-password.value.length)+" more.";
+      ppassword.style.color='red';
+      allowedpassword=false;
+      accesserver();
+    } else {
+      if (password.value!=confirm.value){
+        ppassword.innerHTML="Password is all right";
+        ppassword.style.color='green';
+        matchespassword=false;
+        allowedpassword=true;
+        pconfirm.innerHTML="The passwords doesn't matches.";
+        pconfirm.style.color='red';
+        accesserver();
+      } else {
+        ppassword.innerHTML="Password is allright";
+        ppassword.style.color='green';
+        pconfirm.innerHTML="The passwords matches.";
+        pconfirm.style.color='green';
+        matchespassword=true;
+        allowedpassword=true;
+        accesserver();
+      }
+    }
+  }
+  confirm.oninput=function(){
+    if (password.value!=confirm.value){
+      pconfirm.innerHTML="The passwords doesn't matches.";
+      pconfirm.style.color='red';
+      matchespassword=false;
+      accesserver();
+    } else {
+      matchespassword=true;
+      pconfirm.innerHTML="The passwords matches.";
+      pconfirm.style.color='green';
+      accesserver();
+    }
+  }
+  function accesserver(){
+    if(allowedmail&&allowedpassword&&matchespassword){
+      btn[1].removeAttribute('disabled');
+    } else {
+      if (!btn[1].getAttribute('disabled')){btn[1].setAttribute('disabled','true');}
+    }
+  }
+
+
+</script>
 @endsection
