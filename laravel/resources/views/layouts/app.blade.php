@@ -65,10 +65,13 @@
          <li><a href="#">Productos</a></li>
          <li>Ofertas</li>
          <li>Compra</li>
-         @auth()
+        @auth()
  		  		<li class="nav-item">
  			    	<a class="nav-link disabled" href="/logout">Logout</a>
  			  	</li>
+            @if (Auth::user()->is_admin)
+              {{'algo'}}
+            @endif
  			    @else
 	        <li class="nav-item">
  			    	<a class="nav-link disabled" href="/login">Login</a>

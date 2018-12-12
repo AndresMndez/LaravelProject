@@ -42,7 +42,7 @@ input['name'].onblur=function(){
 
 input['price'].onblur=function(){
 	if (input['price'].type!="number"){
-		p["price"].innerHTML='debes debe ser numerico';
+		p["price"].innerHTML='debes de ingresar numeros';
 		p["price"].style.color="red";
 	} else {
 		if(input['price'].value==""){

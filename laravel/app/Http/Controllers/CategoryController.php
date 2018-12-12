@@ -12,8 +12,15 @@ class CategoryController extends Controller
 	public static function index()
 	{
 			$categories=Category::all();
-			$products=Product::all();
-			return view('principal/product-category',compact('category','products'));
+			$nombre=$categories;
+			foreach ($categories as $value) {
+				$products[]=$value->products;
+			}
+			foreach ($products as $value){
+				$product[]=$value;
+			}
+			dd($product);
+			return view('principal/categories',compact('categories','products','nombre'));
 	}
 
 

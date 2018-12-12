@@ -20,7 +20,7 @@ class CartController extends Controller
         $productos = Product::whereIn('id', session()->get('cart'))->get();
         return view('cart/view', compact('productos','nombre'));
       }else{
-        return view('cart/defaultview');
+        return view('cart/defaultview',compact('nombre'));
       }
     }
 

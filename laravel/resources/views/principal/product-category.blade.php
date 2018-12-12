@@ -8,13 +8,13 @@
 	@if ($category!='[]')
 		<h1 class="h1_home">{{$category[0]->name}}</h1>
 			<section class="home_products">
-			<h2><a href="/{{$category[0]->name}}">{{$category[0]->name}}</a></h2>
+			<h2><a href="/cateogries/{{$category[0]->name}}">{{$category[0]->name}}</a></h2>
 			@if (isset($products[0]))
 				@foreach ($products as $product)
 					<article class="main-seller">
 							<img src="{{$product->image}}">
 							<div class ="product-inside">
-							<p><a href="{{$category[0]->name}}/{{$product->id}}"><strong>{{$product->name}}</strong></a></p>
+							<p><a href="/categories/{{$category[0]->name}}/{{$product->id}}"><strong>{{$product->name}}</strong></a></p>
 									<p>${{$product->price}}</p>
 									<a href="http://127.0.0.1:8000/cart/add/{{$product->id}}" class="product-add">
 											<i class="fas fa-cart-plus"></i>

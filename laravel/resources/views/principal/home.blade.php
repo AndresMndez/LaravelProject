@@ -15,7 +15,7 @@
 										<article class="home_article">
 										<img src="{{$product->image}}" alt="">
 										<div class="home_product_inside">
-											<a href="/{{$category->name}}/{{$product->id}}">
+											<a href="/categories/{{$category->name}}/{{$product->id}}">
 				              	<h3>${{$product->price}}</h3>
 				              	<h4>{{$product->description}}</h4>
 											</a>

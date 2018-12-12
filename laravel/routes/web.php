@@ -32,7 +32,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 //LOGIN
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
-Route::get('prueba','AdminController@show');
+
 //LOGIN
 
 Route::get('faqs', 'HomeController@preguntas');
@@ -44,8 +44,9 @@ Route::get('admin/catalog','AdminController@catalog');
 Route::get('cart/add/{id}', 'CartController@add');
 Route::get('cart/show', 'CartController@show');
 Route::get('cart/borrar/{id}', 'CartController@quitar');
+Route::get('cart/defaultview', 'CartController@show');
 // CARRITO
 
 Route::get('categories','CategoryController@index');
-Route::get('{name}','CategoryController@show');
-Route::get('{name}/{product}','ProductController@show');
+Route::get('categories/{name}','CategoryController@show');
+Route::get('categories/{name}/{product}','ProductController@show');
