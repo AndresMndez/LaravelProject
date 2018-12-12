@@ -14,14 +14,20 @@ class CartController extends Controller
     //mostrar carrito
 
     public function show(){
-      $productos = Product::whereIn('id', session()->get('cart'))->get();
-      return view('cart/view', compact('productos'));
+
+      if (session()->get('cart')) {
+        $productos = Product::whereIn('id', session()->get('cart'))->get();
+        return view('cart/view', compact('productos'));
+      }else{
+        return view('cart/defaultview');
+      }
     }
 
     //agregar item
     public function add($id){
       session()->push('cart', $id);
       Cart::find($id);
+
       return redirect('cart/show');
     }
 

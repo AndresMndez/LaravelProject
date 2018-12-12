@@ -29,7 +29,7 @@
               {{$producto->price}}
             </td>
             <td>
-              <a href="http://127.0.0.1:8000/cart/borrar/{{$producto->id}}" class="">
+              <a href="/cart/borrar/{{$producto->id}}" class="">
                   <span class="fa fa-trash"></span>
               </a>
             </td>
