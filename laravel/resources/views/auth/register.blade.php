@@ -78,7 +78,7 @@
 input=document.getElementsByTagName('input');
 btn=document.getElementsByTagName('button');
 p=document.getElementsByTagName('p');
-span=document.getElementsByTagName('span');
+strong=document.getElementsByTagName('strong');
 pmail=p['email'];
 ppassword=p['password'];
 pconfirm=p['password_confirm'];
@@ -89,8 +89,8 @@ var allowedmail=false;
 var allowedpassword=false;
 var matchespassword=false;
 password.onfocus=function(){
-  if (span[1].innerHTML){
-    span[1].innerHTML="";
+  if (strong[1].innerHTML){
+    strong[1].innerHTML="";
   }
   if (password.value.length<7){
     ppassword.innerHTML="The password need at least "+(7-password.value.length)+" more.";
@@ -119,12 +119,13 @@ password.onfocus=function(){
 }
 mail.onfocus=function(){
   if(mail.value!=""){
+    if (strong[0].innerHTML){
+      strong[0].innerHTML="";
+    }
     var regexMail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     if (!regexMail.test(mail.value))
     {
-      if (span[0].innerHTML){
-        span[0].innerHTML="";
-      }
+
       pmail.innerHTML=("Not a valid Email Address");
       pmail.style.color='red';
       allowedmail=false;
@@ -156,7 +157,7 @@ mail.oninput=function ()
 }
 password.oninput=function(){
   if (password.value.length<7){
-    ppassword.innerHTML="The password need at least "+(7-password.value.length)+" more.";
+    ppassword.innerHTML="The password need at least "+(7-password.value.length)+" more caracters.";
     ppassword.style.color='red';
     allowedpassword=false;
     accesserver();
@@ -170,7 +171,7 @@ password.oninput=function(){
       pconfirm.style.color='red';
       accesserver();
     } else {
-      ppassword.innerHTML="Password is allright";
+      ppassword.innerHTML="Password is all right";
       ppassword.style.color='green';
       pconfirm.innerHTML="The passwords matches.";
       pconfirm.style.color='green';

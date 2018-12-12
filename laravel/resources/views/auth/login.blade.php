@@ -17,11 +17,11 @@
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
                                 <p id="email"></p>
-                                @if ($errors->has('email'))
+
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>@if ($errors->has('email')){{ $errors->first('email') }}@endif</strong>
                                     </span>
-                                @endif
+
                             </div>
                         </div>
 
@@ -31,11 +31,11 @@
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
                                 <p id="password"></p>
-                                @if ($errors->has('password'))
+
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
+                                        <strong>  @if ($errors->has('password')){{ $errors->first('password') }}@endif</strong>
                                     </span>
-                                @endif
+
                             </div>
                         </div>
 
@@ -53,10 +53,9 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" disabled>
                                     {{ __('Login') }}
                                 </button>
-
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
@@ -74,7 +73,7 @@
 input=document.getElementsByTagName('input');
 btn=document.getElementsByTagName('button');
 p=document.getElementsByTagName('p');
-span=document.getElementsByTagName('span');
+strong=document.getElementsByTagName('strong');
 pmail=p['email'];
 ppassword=p['password'];
 mail=input['email'];
@@ -82,11 +81,11 @@ password=input['password'];
 var allowedmail=false;
 var allowedpassword=false;
 mail.onfocus=function(){
+
   if(mail.value!=""){
     var regexMail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     if (!regexMail.test(mail.value))
     {
-      span[0].innerText="";
       pmail.innerHTML=("Not a valid Email Address");
       pmail.style.color='red';
       allowedmail=false;
@@ -101,6 +100,9 @@ mail.onfocus=function(){
 }
 mail.oninput=function ()
 {
+  if(strong[0].innerHTML){
+    strong[0].innerHTML="";
+  }
   var regexMail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
   if (!regexMail.test(mail.value))
   {
@@ -117,6 +119,9 @@ mail.oninput=function ()
 
 }
 password.oninput=function(){
+  if(strong[1].innerHTML){
+    strong[1].innerHTML="";
+  }
   if (password.value.length<7){
     ppassword.innerHTML="The password need at least "+(7-password.value.length)+" more.";
     ppassword.style.color='red';
