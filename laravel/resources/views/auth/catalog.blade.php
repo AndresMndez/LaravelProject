@@ -31,6 +31,9 @@
 			url ="http://127.0.0.1:8000/api/prodcat";
 			var c;
 			var d=new Date();
+			var cont=0;
+			var ref=15;
+			var len = 0;
 			forms=document.getElementsByTagName('form');
 			year=d.getFullYear();
 			month=d.getMonth()+1;
@@ -40,10 +43,16 @@
 			info.onreadystatechange = function() {
 				if (info.readyState == 4 && info.status == 200){
 					c=JSON.parse(info.responseText);
-					c=c.data;
+					c=c.data;		len =
+					for (var i = 0;i<c.length;i++){
+
+					}
 					for (var i = 0;i<c.length;i++){
 						select[0].innerHTML+="<option value="+c[i]["id"]+">"+c[i]["name"]+"</option>";
 				 	}
+					for (i=0;i<c.length;i++){
+						len += c[i]['products'].length;
+					}
 					for (i=0;i<c.length;i++){
 						//Recorro el json para traer los productos y las selecciones de filtros
 						repeticion(i);
@@ -72,14 +81,19 @@
 			/*Pasa por todos los valores de la variable e imprime en el div*/
 			function repeticion(i){
 				for (var x=0;x<c[i]['products'].length;x++){
-					if(!c[i]["products"][x]["delete_at"]){
-						if(select[1].innerHTML.indexOf(c[i]["products"][x]["brand"])==-1){select[1].innerHTML+="<option value="+c[i]["products"][x]["id"]+">"+c[i]["products"][x]["brand"]+"</option>";}
-						if(select[2].innerHTML.indexOf(c[i]["products"][x]["price"])==-1){select[2].innerHTML+="<option value="+c[i]["products"][x]["id"]+">"+c[i]["products"][x]["price"]+"</option>";}
-						if(select[3].innerHTML.indexOf(c[i]["products"][x]["name"])==-1){select[3].innerHTML+="<option value="+c[i]["products"][x]["id"]+">"+c[i]["products"][x]["name"]+"</option>";}
-						div[5].innerHTML+="<form method='get' action='/save' enctype='multipart/form-data'><input type='hidden' value="+c[i]["products"][x]["id"]+" name='id'> <input type='text' value='"+c[i]["products"][x]["name"]+"' name='product'><input type='hidden' name='categoryid' value = '"+c[i]["id"]+"'><input type='text' value='"+c[i]["name"]+"' name='categoryname'><input  type='text' value='"+c[i]["products"][x]["brand"]+"' name='brand'><input type='number' value="+c[i]["products"][x]["price"]+" name='price'><input type='text' value='"+c[i]["products"][x]["description"]+"' name='description'><img src='"+c[i]["products"][x]["image"]+"' width=30px height=24px > <input type='checkbox' name='delete' value='"+year+"-"+month+"-"+day+"'> <i class='fas fa-trash-alt'></i><button type='submit' name='submit' value='submit'>Submit</button></form>";
+					if (!c[i]['products']['delete_at']){
+							if(select[1].innerHTML.indexOf(c[i]["products"][x]["brand"])==-1){select[1].innerHTML+="<option value="+c[i]["products"][x]["id"]+">"+c[i]["products"][x]["brand"]+"</option>";}
+							if(select[2].innerHTML.indexOf(c[i]["products"][x]["price"])==-1){select[2].innerHTML+="<option value="+c[i]["products"][x]["id"]+">"+c[i]["products"][x]["price"]+"</option>";}
+							if(select[3].innerHTML.indexOf(c[i]["products"][x]["name"])==-1){select[3].innerHTML+="<option value="+c[i]["products"][x]["id"]+">"+c[i]["products"][x]["name"]+"</option>";}
+							div[5].innerHTML+="<form method='get' action='/save' enctype='multipart/form-data'><input type='hidden' value="+c[i]["products"][x]["id"]+" name='id'> <input type='text' value='"+c[i]["products"][x]["name"]+"' name='product'><input type='hidden' name='categoryid' value = '"+c[i]["id"]+"'><input type='text' value='"+c[i]["name"]+"' name='categoryname'><input  type='text' value='"+c[i]["products"][x]["brand"]+"' name='brand'><input type='number' value="+c[i]["products"][x]["price"]+" name='price'><input type='text' value='"+c[i]["products"][x]["description"]+"' name='description'><img src='"+c[i]["products"][x]["image"]+"' width=30px height=24px > <input type='checkbox' name='delete' value='"+year+"-"+month+"-"+day+"'> <i class='fas fa-trash-alt'></i><button type='submit' name='submit' value='submit'>Submit</button></form>";
+						}
 					}
 				}
-			}
+
+			// function paginacion(cantidadporciclo,ciclo){
+			// 	for (var i=ciclo*cantidadporciclo;i<cantidadporciclo*(ciclo+1);i++){
+			// 	}
+			// }
 		</script>
 	</main>
 @endsection

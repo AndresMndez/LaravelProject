@@ -18,12 +18,19 @@
 			<label for="brand">Brand</label>
 			<input id="brand" type="text" name="brand" value="">
 
+			<input id="catid" type="hidden" name="catid" value="">
 			<label for="cName">Category</label>
 			<input id="cName" type="text" name="cName" value="">
 
-			<button type="submit" name="submit" value="submit">Add</button>
+			<button id="submit" type="submit" name="submit" value="submit" disabled>Add</button>
 		</form>
 		<script type="text/javascript" >
+		var Category=false;
+		var Product=false;
+		var Price=false;
+		var Brand=false;
+		btn=document.getElementsByTagName('btn');
+		form=document.getElementsByTagName('form');
 			info = new XMLHttpRequest();
 			url ="http://127.0.0.1:8000/api/prodcat";
 			var c;
@@ -38,17 +45,71 @@
 			info.send();
 			input[1].onblur=function(){
 				if(input[1].value!=""){
+					Product=true;
 					for (var i=0;i<c.length;i++){
 						for (var x=0;x<c[i]['products'].length;x++){
 							if (c[i]['products'][x]["name"]==input[1].value){
-								input[1].focus;
 								alert('Dicho nombre de Producto ya existe');
+								Product=false;
 								break;
+							}
+						}
+					}
+				} else {
+					alert('debe poner un nombre de producto');
+				}
+				if (Product==true){
+					verify();
+				}
+
+			}
+
+			input[4].onblur=function(){
+				if(input[4].value==""){
+					alert('debes Ponerle un precio al producto');
+							} else {
+								Price=true;
+								verify();
 							}
 						}
 					}
 				}
 			}
+			input[5].onblur=function(){
+				if(input[5].value==""){
+					alert('Debes ponerle una marca al producto');
+				} else {
+					Brand=true;
+					verify();
+				}
+			}
+
+			input[7].onblur=function(){
+				if(input[7].value!=""){
+					input[6].value="";
+					for (var i=0;i<c.length;i++){
+							if (c[i]['name']==input[7].value){
+								input[6].value=c[i]['id'];
+								Category=true;
+								break;
+							}
+						}
+					}
+					if (Category!=true){
+						alert('dicha categoria no existe');
+					}
+					verify();
+				}
+
+			function verify(){
+				if (Product&&Category&&Brand&&Price){
+					document.getElementById("submit").removeAttribute("disabled");
+				} else {
+
+				}
+
+			}
 		</script>
+
 	</main>
 @endsection
