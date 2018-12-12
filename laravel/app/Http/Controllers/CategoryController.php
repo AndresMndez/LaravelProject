@@ -13,14 +13,7 @@ class CategoryController extends Controller
 	{
 			$categories=Category::all();
 			$nombre=$categories;
-			foreach ($categories as $value) {
-				$products[]=$value->products;
-			}
-			foreach ($products as $value){
-				$product[]=$value;
-			}
-			dd($product);
-			return view('principal/categories',compact('categories','products','nombre'));
+			return view('principal/categories',compact('categories','nombre'));
 	}
 
 

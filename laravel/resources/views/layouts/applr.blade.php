@@ -71,10 +71,13 @@
  			  	</li>
             @if (Auth::user()->is_admin)
               <li>
-              	<a class="nav-link disabled" href="/admin/addProduct">Add Products</a>
+                <a class="nav-link disabled" href="/admin/addProduct">Add Products</a>
               </li>
               <li>
-              	<a class="nav-link disabled" href="/admin/catalog">View All products</a>
+                <a class="nav-link disabled" href="/admin/catalog">View All products</a>
+              </li>
+              <li>
+                <a class="nav-link disabled" href="/admin/users">View All users</a>
               </li>
             @endif
  			    @else
@@ -93,7 +96,6 @@
   <main class="py-4">
 
       @yield('content')
-      @include('principal/blocks/category-menu')
   </main>
 
   <footer>

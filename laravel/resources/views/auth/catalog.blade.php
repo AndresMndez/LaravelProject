@@ -1,4 +1,7 @@
-@extends('principal/app')
+@extends('layouts/app')
+@section('title')
+	{{'Catalogo'}}
+@endsection
 
 @section('main')
 	<main>

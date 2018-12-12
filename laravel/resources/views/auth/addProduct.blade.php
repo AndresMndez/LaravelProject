@@ -1,5 +1,7 @@
-@extends('layouts/app')
-
+@extends('layouts.app')
+@section('title')
+	{{'Add Products'}}
+@endsection
 @section('content')
 	<main>
 		<form class="" action="" enctype="multipart/form-data" style="display:flex;flex-wrap:wrap;flex-direction:column">

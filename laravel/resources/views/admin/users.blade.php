@@ -1,5 +1,7 @@
-@extends('admin.app')
-
+@extends('layouts.applr')
+@section('title')
+  {{"Users"}}
+@endsection
 @section('content')
 
   <h1>Usuarios</h1>
