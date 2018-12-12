@@ -1,5 +1,9 @@
 @extends ('layouts/app')
 
+@section('title')
+{{"Cart View"}}
+@endsection
+
 @section('content')
   <div class="table-responsive">
     <table class="table .table-hover table-striped table-bordered">

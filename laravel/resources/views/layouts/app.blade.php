@@ -61,8 +61,8 @@
      <p class="visible-mobile">Menu</p>
 
      <ul class="list-menu">
-         <li>Home</li>
-         <li>Productos</li>
+         <li><a href="/home">Home</a></li>
+         <li><a href="#">Productos</a></li>
          <li>Ofertas</li>
          <li>Compra</li>
          @auth()
@@ -94,7 +94,7 @@
         <li><a href="#">Trabajá con nosotros</a></li>
         <li><a href="#">Términos y condiciones</a></li>
         <li><a href="#">Políticas de privacidad</a></li>
-        <li><a href="preguntas.php">Preguntas frecuentes</a></li>
+        <li><a href="/faqs.php">Preguntas frecuentes</a></li>
       </ul>
     </div>
   </footer>

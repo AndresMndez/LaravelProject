@@ -1,6 +1,6 @@
 
 @extends ('layouts/app')
-@section('tittle')
+@section('title')
   {{'Faqs'}}
 @endsection
 @section ('content')

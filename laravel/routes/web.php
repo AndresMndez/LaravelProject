@@ -13,8 +13,6 @@
 
 
 // API
-Route::get('categories','CategoryController@index');
-Route::get('{name}','CategoryController@show');
 Route::get('api/categories','ApiController@categories');
 Route::get('api/products','ApiController@products');
 Route::post('api/users','ApiController@users');
@@ -37,9 +35,7 @@ Route::get('logout', 'Auth\LoginController@logout');
 Route::get('prueba','AdminController@show');
 //LOGIN
 
-Route::get('faqs', function () {
-    return view('principal.preguntas');
-});
+Route::get('faqs', 'HomeController@preguntas');
 
 Route::get('admin/catalog','AdminController@catalog');
 
@@ -49,3 +45,7 @@ Route::get('cart/add/{id}', 'CartController@add');
 Route::get('cart/show', 'CartController@show');
 Route::get('cart/borrar/{id}', 'CartController@quitar');
 // CARRITO
+
+Route::get('categories','CategoryController@index');
+Route::get('{name}','CategoryController@show');
+Route::get('{name}/{product}','ProductController@show');

@@ -17,7 +17,8 @@ class AdminController extends Controller
 	public static function addProduct()
 	{
 		$var = 'Add Products & Categories';
-		return view('auth/addProduct',['var' => $var]);
+		$nombre=\App\Category::all();
+		return view('auth/addProduct',['var' => $var],compact('nombre'));
 	}
 
 	public static function catalog()

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Product;
+use \App\Product;
+use \App\Categroy;
 
 class ProductController extends Controller
 {
@@ -22,14 +23,22 @@ class ProductController extends Controller
     }
 
     public function modify($request){
-      $producto = Product::find($id);
+      $producto = \App\Product::find($id);
       $producto->update(request()->all());
 
       return view();
     }
 
     public function drop($id){
-      $producto = Product::find($id);
+      $producto = \App\Product::find($id);
       $producto->delete();
+    }
+
+    public function show($categories,$productid)
+    {
+      $nombre=\App\Category::all();
+      $category=\App\Category::where('name',$categories)->get();
+      $product=\App\Product::find($productid);
+      return view('principal/productview',compact('nombre','category','product'));
     }
 }

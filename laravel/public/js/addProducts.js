@@ -41,15 +41,21 @@ input['name'].onblur=function(){
 }
 
 input['price'].onblur=function(){
-	if(input['price'].value==""){
-		p["price"].innerHTML='debes Ponerle un precio al producto';
+	if (input['price'].type!="number"){
+		p["price"].innerHTML='debes debe ser numerico';
 		p["price"].style.color="red";
 	} else {
-		Price=true;
-		verify();
-		p["price"].innerHTML='Precio esta ok';
-		p["price"].style.color="green";
+		if(input['price'].value==""){
+			p["price"].innerHTML='debes Ponerle un precio al producto';
+			p["price"].style.color="red";
+		} else {
+			Price=true;
+			verify();
+			p["price"].innerHTML='Precio esta ok';
+			p["price"].style.color="green";
+		}
 	}
+
 }
 
 input['brand'].onblur=function(){

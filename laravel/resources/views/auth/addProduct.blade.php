@@ -1,6 +1,6 @@
-@extends('principal/app')
+@extends('layouts/app')
 
-@section('main')
+@section('content')
 	<main>
 		<form class="" action="" enctype="multipart/form-data" style="display:flex;flex-wrap:wrap;flex-direction:column">
 			@csrf

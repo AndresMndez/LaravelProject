@@ -1,6 +1,6 @@
 @extends ('layouts/app')
-@section('tittle')
-	{{'All Categories'}}
+@section('title')
+	{{$category[0]->name}}
 @endsection
 @section ('content')
 <div	 class="container_home">
@@ -11,18 +11,16 @@
 			<h2><a href="/{{$category[0]->name}}">{{$category[0]->name}}</a></h2>
 			@if (isset($products[0]))
 				@foreach ($products as $product)
-					<article class="home_article">
-						<img src="{{$product->image}}" alt="">
-						<div class="home_product_inside">
-							<a href="/{{$category[0]->name}}/{{$product->id}}">
-								<h3>${{$product->price}}</h3>
-								<h4>{{$product->description}}</h4>
-								<a href="http://127.0.0.1:8000/cart/add/{{$product->id}}" class="product-add">
-										<i class="fas fa-cart-plus"></i>
-										<p>Agregar al Carrito</p>
-								</a>
-							</a>
-						</div>
+					<article class="main-seller">
+							<img src="{{$product->image}}">
+							<div class ="product-inside">
+							<p><a href="{{$category[0]->name}}/{{$product->id}}"><strong>{{$product->name}}</strong></a></p>
+									<p>${{$product->price}}</p>
+									<a href="http://127.0.0.1:8000/cart/add/{{$product->id}}" class="product-add">
+											<i class="fas fa-cart-plus"></i>
+											<p>Agregar al Carrito</p>
+									</a>
+							</div>
 					</article>
 				@endforeach
 			@else
