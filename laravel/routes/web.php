@@ -22,7 +22,6 @@ Route::get('api/prodcat','ApiController@categoriesAndProducts');
 //DAsHBOARD ADMINISTRADOR
 Route::get('admin/addProduct','AdminController@addProduct');
 Route::get('admin/catalog','AdminController@catalog');
-Route::get('admin/index','AdminController@index');
 Route::get('admin/users', 'AdminController@users');
 //DAsHBOARD ADMINISTRADOR
 
@@ -36,8 +35,6 @@ Route::get('logout', 'Auth\LoginController@logout');
 //LOGIN
 
 Route::get('faqs', 'HomeController@preguntas');
-
-Route::get('admin/catalog','AdminController@catalog');
 
 
 // CARRITO

@@ -76,6 +76,9 @@
               <li>
               	<a class="nav-link disabled" href="/admin/catalog">View All products</a>
               </li>
+              <li>
+                <a class="nav-link disabled" href="/admin/users">View All users</a>
+              </li>
             @endif
  			    @else
 	        <li class="nav-item">
