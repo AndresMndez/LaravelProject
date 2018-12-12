@@ -14,7 +14,7 @@
 
       <tbody>
           <tr>
-            <td><span>El carrito esta vacio</span></td>}
+            <td><span>El carrito esta vacio</span></td>
             <td></td>
             <td></td>
             <td></td>
