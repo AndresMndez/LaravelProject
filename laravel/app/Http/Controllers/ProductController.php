@@ -22,9 +22,14 @@ class ProductController extends Controller
     }
 
     public function modify($request){
-      $producto = Product::find($id)
+      $producto = Product::find($id);
       $producto->update(request()->all());
 
       return view();
+    }
+
+    public function drop($id){
+      $producto = Product::find($id);
+      $producto->delete();
     }
 }
