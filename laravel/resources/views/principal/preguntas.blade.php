@@ -1,6 +1,9 @@
-@extends ('principal/app')
-@section ('main')
-  <main class="main_preguntas">
+
+@extends ('layouts/app')
+@section('tittle')
+  {{'Faqs'}}
+@endsection
+@section ('content')
     <h1 id="principal_pregunta">Preguntas Frecuentes</h1>
     <!-- CAJA DE PREGUNTAS -->
     <section class="questions">
@@ -45,5 +48,5 @@
         <p>Al pagar, se generará automáticamente un comprobante de pago válido que podés visualizar desde la sección “Últimos movimientos”.</p>
       </article>
     </section><!-- SECCION DE RESPUESTAS -->
-  </main><!-- CUERPO PRINCIPAL -->
+  <!-- CUERPO PRINCIPAL -->
   @endsection
