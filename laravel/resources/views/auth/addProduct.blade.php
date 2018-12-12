@@ -3,6 +3,7 @@
 @section('main')
 	<main>
 		<form class="" action="" enctype="multipart/form-data" style="display:flex;flex-wrap:wrap;flex-direction:column">
+			@csrf
 			<label for="name">Product</label>
 			<input id="name" type="text" name="name" value="">
 			<p id="name"></p>
@@ -101,40 +102,56 @@
 				}
 			}
 
-			input["cName"].onblur=function(){
-				if(input["cName"].value==""){
-					input["catid"].value="";
-					p['cName'].innerHTML="";
-					for (var i=0;i<c.length;i++){
-							if (c[i]['name']==input["cName"].value){
-								input["catid"].value=c[i]['id'];
-								Category=true;
-								verify();
-								break;
-							}
-						}
-					if (Category!=true){
-						var a = confirm('dicha categoria no existe ¿quiere crearla?');
-						if(a!=true){
-							input["catid"].value=null;
-							p["cName"].innerHTML="Estas creando una nueva categoria para tus productos";
-							p["cName"].style.color="green";
-							Category=true;
-						} else {
-							p["cName"].innerHTML="";
-							for (var i=0;i<c.length;i++){
-								p["cName"].innerHTML+=c[i]["name"]+"<br>";
-							}
-							p["cName"].innerHTML+="Estas son todas las categorias disponibles";
-							p["cName"].style.color="red";
-							Category=false;
-						}
-					}
-					verify();
-				}
-				p["cName"].innerHTML="Debes agregarle una Categoria";
-				p["cName"].style.color="red";
-			}
+			// input["cName"].onblur=function(){
+			// 	if(input["cName"].value==""){
+			// 		input["catid"].value="";
+			// 		p['cName'].innerHTML="Sin Categoria";
+			// 		for (var i=0;i<c.length;i++){
+			// 			if (c[i]['name']==input["cName"].innerText){
+			// 				input["catid"].value=c[i]['id'];
+			// 				Category=true;
+			// 				verify();
+			// 				break;
+			// 			}
+			// 		}
+			// 		if (Category!=true){
+			// 			var a = confirm('dicha categoria no existe ¿quiere crearla?');
+			// 			if(a!=true){
+			// 				input["catid"].value=null;
+			// 				p["cName"].innerHTML="Estas creando una nueva categoria para tus productos";
+			// 				p["cName"].style.color="green";
+			// 				Category=true;
+			// 			}
+			// 	} else {
+			// 		if (input["cName"].value!=""){
+			// 		input["catid"].value="";
+			// 		for (var i=0;i<c.length;i++){
+			// 				if (c[i]['name']==input["cName"].innerText){
+			// 					input["catid"].value=c[i]['id'];
+			// 					Category=true;
+			// 					verify();
+			// 					break;
+			// 				}
+			// 			}
+			// 		} else {
+			//
+			// 			}
+			// 		 else {
+			// 				p["cName"].innerHTML="";
+			// 				for (var i=0;i<c.length;i++){
+			// 					p["cName"].innerHTML+=c[i]["name"]+"<br>";
+			// 				}
+			// 				p["cName"].innerHTML+="Estas son todas las categorias disponibles";
+			// 				p["cName"].style.color="red";
+			// 				Category=false;
+			// 				}
+			// 			}
+			// 			verify();
+			// 		} else {
+			// 			p["cName"].innerHTML="Debes agregarle una Categoria";
+			// 			p["cName"].style.color="red";
+			// 		}
+			// 	}
 
 			avatar.onload=function(){
 				if (input["avatar"]!=""){
