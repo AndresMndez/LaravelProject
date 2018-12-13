@@ -1,8 +1,12 @@
 @extends('layouts.applr')
 
-
+@section('title')
+  {{'Catalogo'}}
+@endsection
 @section('content')
+  <p style="color:green">@if(isset($saved)){{$saved}}@endif</p>
   <h1>Lista de Productos</h1>
+
 
   <div class="table-responsive">
 
@@ -13,6 +17,7 @@
           <th scope="col">Descripcion</th>
           <th scope="col">Marca</th>
           <th scope="col">Precio</th>
+          <th scope="col">Categoria</th>
           <th scope="col">Imagenes</th>
           <th scope="col"></th>
         </tr>
@@ -24,12 +29,13 @@
             <td>{{ $producto->description }}</td>
             <td>{{ $producto->brand }}</td>
             <td>{{ $producto->price }}</td>
-            <td><img src="{{ $producto->image }}" style="width:20px;"></td>
+            <td>{{$producto->categories[0]->name}}</td>
+            <td><img src="{{ $producto->image }}" style="width:80px;"></td>
             <td>
-              <a class="btn btn-primary" href="">
+              <a class="btn btn-primary" href="/admin/catalog/{{$producto->id}}">
                 <span class="fa fa-pencil-alt"></span>
               </a>
-              <form action="" method="POST">
+              <form action="/admin/catalog/delete/{{$producto->id}}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">
@@ -43,6 +49,4 @@
     </table>
   </div>
     {{$productos->  links()}}
-
-  {{-- {{ $productos->links() }} --}}
 @endsection

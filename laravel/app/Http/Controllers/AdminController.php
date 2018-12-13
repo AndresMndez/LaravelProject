@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App;
+use \App\Product;
+use \App\Category;
 
 class AdminController extends Controller
 {
@@ -53,5 +55,12 @@ class AdminController extends Controller
 	{
 		$usuarios = App\User::whereNotNull('id')->paginate(10);
 		return view('admin/users',compact('usuarios'));
+	}
+
+	public static function editor($id)
+	{
+		$product=Product::find($id);
+		// dd($product);
+		return view('admin/product/change',['product'=>$product]);
 	}
 }

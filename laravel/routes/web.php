@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('prueba',function(){return view('principal.prueba');});
+
 
 // API
 Route::get('api/categories','ApiController@categories');
@@ -21,8 +23,10 @@ Route::get('api/prodcat','ApiController@categoriesAndProducts');
 
 //DAsHBOARD ADMINISTRADOR
 Route::get('admin/addProduct','AdminController@addProduct');
+Route::get('admin/catalog/{id}','Admincontroller@editor');
 Route::get('admin/catalog','AdminController@catalog');
 Route::get('admin/users', 'AdminController@users');
+Route::post('admin/catalog/change','ProductController@edit');
 //DAsHBOARD ADMINISTRADOR
 
 Route::get('/', 'HomeController@index')->name('home');
