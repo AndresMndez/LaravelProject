@@ -35,22 +35,6 @@ class ProductController extends Controller
     {
       $categories=Category::all();
       $categoryExists=false;
-      $relationCategoryProductIsSet=false;
-      $product=Product::find($request->input('id'));
-      $product->name=$request->input('name');
-      $product->description=$request->input('description');
-      $product->price=$request->input('price');
-      $product->brand=$request->input('brand');
-      if ($request->file('avatar')){
-        $file = $request->file('avatar');
-        $name=str_replace(" ","_",$product->name).".".$file->extension();
-        $folder=$product->categories[0]->name;
-        $path=$file->storeAs($folder,$name);
-        $path="/"."storage/images/".$product->categories[0]->name."/$name";
-        $product->image=$path;
-      }
-      $product->save();
-      /*Me fijo si se agrego una categoria*/
       foreach ($categories as $category) {
         if($category->name==$request->input('category')){
           $categoryExists=true; //la Categoria la categoria existe
@@ -70,6 +54,23 @@ class ProductController extends Controller
           $product->categories()->sync($category->id);
         }
       }
+      $relationCategoryProductIsSet=false;
+      $product=Product::find($request->input('id'));
+      $product->name=$request->input('name');
+      $product->description=$request->input('description');
+      $product->price=$request->input('price');
+      $product->brand=$request->input('brand');
+      if ($request->file('avatar')){
+        $file = $request->file('avatar');
+        $name=str_replace(" ","_",$product->name).".".$file->extension();
+        $folder=$product->categories[0]->name;
+        $path=$file->storeAs($folder,$name);
+        $path="/"."storage/images/".$product->categories[0]->name."/$name";
+        $product->image=$path;
+      }
+      $product->save();
+      /*Me fijo si se agrego una categoria*/
+
       $productos = Product::whereNotNull('id')->paginate(10);
       $saved="Se han guardado los cambios";
   		return view('admin.products',compact('productos','saved'));
