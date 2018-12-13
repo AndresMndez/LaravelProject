@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App;
 use \App\Product;
 use \App\Category;
+use \App\User;
 
 class AdminController extends Controller
 {
@@ -18,13 +19,13 @@ class AdminController extends Controller
 
 	public static function addProduct()
 	{
-		$nombre=\App\Category::all();
+		$nombre=Category::all();
 		return view('auth/addProduct',compact('nombre'));
 	}
 
 	public static function catalog()
 	{
-		$productos = App\Product::whereNotNull('id')->paginate(10);
+		$productos =Product::whereNotNull('id')->paginate(10);
 
 		return view('admin.products',compact('productos'));
 	}
@@ -35,25 +36,9 @@ class AdminController extends Controller
 		return view('auth/index',['var'=>$var]);
 	}
 
-	public static function save(Request $request)
-	{
-		$product=\App\Product::find($request->id);
-		$product->name=$request->product;
-		$product->description=$request->description;
-		$product->brand=$request->brand;
-		$product->price=$request->price;
-		if ($request->delete){
-			$product->delete_at=$request->delete;
-		}
-		$product->save();
-		$saved="It saved your changes";
-		$var='Catalog';
-		return view('auth/catalog',['var'=>$var],['saved'=>$saved]);
-	}
-
 	public static function users()
 	{
-		$usuarios = App\User::whereNotNull('id')->paginate(10);
+		$usuarios =User::whereNull('deleted_at')->paginate(10);
 		return view('admin/users',compact('usuarios'));
 	}
 
@@ -63,4 +48,23 @@ class AdminController extends Controller
 		// dd($product);
 		return view('admin/product/change',['product'=>$product]);
 	}
+
+	public static function editorUser($id)
+	{
+		$user=User::find($id);
+		return view('admin/user/change',compact('user'));
+	}
+
+	public static function editUser(Request $request)
+	{
+		$user=User::find($request->input('id'));
+		$user->name=$request->input('name');
+		$user->email=$request->input('email');
+		$user->is_admin=$request->input('is_admin');
+		$user->save();
+		$saved="Se han guardado los cambios de ".$user->email;
+		$usuarios =User::whereNull('deleted_at')->paginate(10);
+		return view('admin/users',compact('usuarios'));
+	}
+
 }

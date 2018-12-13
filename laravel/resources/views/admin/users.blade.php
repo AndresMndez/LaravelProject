@@ -13,7 +13,7 @@
           <th scope="col">Nombre</th>
           <th scope="col">Email</th>
           <th scope="col">Tipo</th>
-          <th scope="col"></th>
+          <th scope="col">Accion</th>
         </tr>
       </thead>
 
@@ -29,18 +29,19 @@
                 Cliente
               @endif
             </td>
-
             <td>
-              <a class="btn btn-primary" href="">
+              <a class="btn btn-primary" href="/admin/user/{{$usuario->id}}">
                 <span class="fa fa-pencil-alt"></span>
               </a>
-              <form action="" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger">
-                  <span class="fa fa-trash"></span>
-                </button>
-              </form>
+              @if ($usuario->id!=1)
+                <form action="/admin/user/delete/{{$usuario->id}}" method="POST">
+                  @csrf
+                  @method('post')
+                  <button type="submit" class="btn btn-danger">
+                    <span class="fa fa-trash"></span>
+                  </button>
+                </form>
+              @endif
             </td>
           </tr>
         @endforeach

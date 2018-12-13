@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use \App\Product;
 use \App\Category;
@@ -10,18 +11,8 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
 
+    protected $dates = ['delete_at'];
 
-    public function modify($request){
-      $producto = \App\Product::find($id);
-      $producto->update(request()->all());
-
-      return view();
-    }
-
-    public function drop($id){
-      $producto = \App\Product::find($id);
-      $producto->delete();
-    }
 
     public function show($categories,$productid)
     {
@@ -64,8 +55,18 @@ class ProductController extends Controller
       $product->save();
       /*Me fijo si se agrego una categoria*/
 
-      $productos = Product::whereNotNull('id')->paginate(10);
+      $productos = Product::whereNull('delete_at')->paginate(10);
       $saved="Se han guardado los cambios";
   		return view('admin.products',compact('productos','saved'));
     }
+
+    public static function delete($id)
+    {
+      $product=Product::find($id);
+      $product->delete_at=date("Y-m-d ")
+      $saved="Se ha borrado con exito el articulo";
+      $productos=Product::whereNull('delete_at');
+      return view('admin.products',compact('productos','saved'));
+    }
+
 }

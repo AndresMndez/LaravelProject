@@ -26,6 +26,8 @@ Route::get('admin/addProduct','AdminController@addProduct');
 Route::get('admin/catalog/{id}','Admincontroller@editor');
 Route::get('admin/catalog','AdminController@catalog');
 Route::get('admin/users', 'AdminController@users');
+Route::get('admin/user/{id}','AdminController@editorUser');
+Route::post('admin/user/change','AdminController@editUser');
 Route::post('admin/catalog/change','ProductController@edit');
 //DAsHBOARD ADMINISTRADOR
 
@@ -51,3 +53,5 @@ Route::get('cart/defaultview', 'CartController@show');
 Route::get('categories','CategoryController@index');
 Route::get('categories/{name}','CategoryController@show');
 Route::get('categories/{name}/{product}','ProductController@show');
+Route::delete('admin/catalog/delete/{id}','ProductController@delete');
+Route::post('admin/user/delete/{id}','UserController@delete');

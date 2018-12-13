@@ -4,7 +4,7 @@
         <ul>
           <li><a href="/home">Home</a></li>
           @foreach ($nombre as $value)
-            <li><a href="/{{$value->name}}">{{$value->name}}</a></li>
+            <li><a href="/categories/{{$value->name}}">{{$value->name}}</a></li>
           @endforeach
         </ul>
     </nav>

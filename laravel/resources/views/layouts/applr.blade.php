@@ -48,11 +48,11 @@
           </div>
       </div>
 
-     <div class="amount-bar">
-          <i class="fas fa-cart-plus"></i>
-          <p>@php $precioFinal;@endphp</p>
-          <i class="fas fa-heart"></i>
-      </div>
+      <div class="amount-bar">
+         <a href="/cart/show"><i class="fas fa-cart-plus"></i></a>
+
+           <i class="fas fa-heart"></i>
+       </div>
 
   </header>
 
@@ -104,7 +104,7 @@
         <li><a href="#">Trabajá con nosotros</a></li>
         <li><a href="#">Términos y condiciones</a></li>
         <li><a href="#">Políticas de privacidad</a></li>
-        <li><a href="/faqs.php">Preguntas frecuentes</a></li>
+        <li><a href="/faqs">Preguntas frecuentes</a></li>
       </ul>
     </div>
   </footer>

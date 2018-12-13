@@ -20,11 +20,8 @@
     </div>
 
    <div class="amount-bar">
-        <i class="fas fa-cart-plus"></i>
-        <!--<p><?php/*
-        setlocale(LC_MONETARY, 'en_US');
-        echo money_format('%(#10n', $precioFinal);
-        */?></p>-->
+      <a href="/cart/show"><i class="fas fa-cart-plus"></i>My Cart</a>  
+
         <i class="fas fa-heart"></i>
     </div>
 
