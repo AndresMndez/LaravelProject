@@ -35,12 +35,11 @@ class ProductController extends Controller
     {
       $categories=Category::all();
       $categoryExists=false;
+      $product=Product::find($request->input('id'));
       foreach ($categories as $category) {
         if($category->name==$request->input('category')){
           $categoryExists=true; //la Categoria la categoria existe
-        }
-        if ($product->categories[0]->name==$request->input('category')){
-          $relationCategoryProductIsSet=true;
+          $product->categories()->sync($category->id);
         }
       }
       if ($categoryExists==false){
@@ -48,14 +47,8 @@ class ProductController extends Controller
         $category->save();
         $category=Category::orderBy('id','DESC')->first();
         $product->categories()->sync($category->id);
-      } else {
-        if ($relationCategoryProductIsSet==false){
-          $category=Category::find($product->categories[0]->id);
-          $product->categories()->sync($category->id);
-        }
       }
-      $relationCategoryProductIsSet=false;
-      $product=Product::find($request->input('id'));
+
       $product->name=$request->input('name');
       $product->description=$request->input('description');
       $product->price=$request->input('price');
