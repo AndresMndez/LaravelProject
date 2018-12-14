@@ -35,9 +35,10 @@
               <a class="btn btn-primary" href="/admin/catalog/{{$producto->id}}">
                 <span class="fa fa-pencil-alt"></span>
               </a>
-              <form action="/admin/catalog/delete/{{$producto->id}}" method="POST">
+              <form action="/admin/catalog" method="POST">
                 @csrf
                 @method('DELETE')
+                <input type="hidden" name="id" value="{{$producto->id}}">
                 <button type="submit" class="btn btn-danger">
                   <span class="fa fa-trash"></span>
                 </button>

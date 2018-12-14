@@ -57,16 +57,18 @@ class ProductController extends Controller
 
       $productos = Product::whereNull('delete_at')->paginate(10);
       $saved="Se han guardado los cambios";
-  		return view('admin.products',compact('productos','saved'));
+  		return view('admin/products',compact('productos','saved'));
     }
 
-    public static function delete($id)
+    public static function delete(Request $request)
     {
-      $product=Product::find($id);
-      $product->delete_at=date("Y-m-d ")
+      $product=Product::find($request->input('id'));
+
+      $product->delete_at=date("Y-m-d ");
+      $product->save();
       $saved="Se ha borrado con exito el articulo";
-      $productos=Product::whereNull('delete_at');
-      return view('admin.products',compact('productos','saved'));
+      $productos=Product::whereNull('delete_at')->paginate(10);
+      return view('admin/products',compact('productos','saved'));
     }
 
 }

@@ -53,5 +53,5 @@ Route::get('cart/defaultview', 'CartController@show');
 Route::get('categories','CategoryController@index');
 Route::get('categories/{name}','CategoryController@show');
 Route::get('categories/{name}/{product}','ProductController@show');
-Route::delete('admin/catalog/delete/{id}','ProductController@delete');
+Route::delete('admin/catalog','ProductController@delete');
 Route::post('admin/user/delete/{id}','UserController@delete');
