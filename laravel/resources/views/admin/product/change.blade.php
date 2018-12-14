@@ -5,7 +5,7 @@
 @endsection
 @section('content')
 	<h1>Cambiar {{$product->name}}</h1>
-	<form class="" action="/admin/catalog/change" method="post" enctype="multipart/form-data">
+	<form class="" action="/admin/catalog" method="post" enctype="multipart/form-data">
 		@csrf
 			<input type="hidden" name="id" value="{{$product->id}}">
 			<label for="name">Name</label>
