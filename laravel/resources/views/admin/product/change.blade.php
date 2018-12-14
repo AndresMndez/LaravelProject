@@ -7,6 +7,7 @@
 	<h1>Cambiar {{$product->name}}</h1>
 	<form class="" action="/admin/catalog" method="post" enctype="multipart/form-data">
 		@csrf
+    @method("post")
 			<input type="hidden" name="id" value="{{$product->id}}">
 			<label for="name">Name</label>
 			<input type="text" name="name" value="{{$product->name}}">

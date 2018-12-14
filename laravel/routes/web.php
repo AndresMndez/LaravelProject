@@ -28,7 +28,7 @@ Route::get('admin/catalog','AdminController@catalog');
 Route::get('admin/users', 'AdminController@users');
 Route::get('admin/user/{id}','AdminController@editorUser');
 Route::post('admin/user/change','AdminController@editUser');
-Route::post('admin/catalog/change','ProductController@edit');
+Route::post('admin/catalog','ProductController@edit');
 //DAsHBOARD ADMINISTRADOR
 
 Route::get('/', 'HomeController@index')->name('home');

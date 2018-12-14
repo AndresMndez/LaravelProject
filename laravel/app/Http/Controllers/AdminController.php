@@ -25,9 +25,8 @@ class AdminController extends Controller
 
 	public static function catalog()
 	{
-		$productos =Product::whereNotNull('id')->paginate(10);
-
-		return view('admin.products',compact('productos'));
+		$productos=Product::whereNull('delete_at')->paginate(10);
+		return view('admin/products',compact('productos'));
 	}
 
 	public static function index()

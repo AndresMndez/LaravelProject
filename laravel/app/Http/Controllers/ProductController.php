@@ -28,7 +28,7 @@ class ProductController extends Controller
       $categoryExists=false;
       $product=Product::find($request->input('id'));
       foreach ($categories as $category) {
-        if($category->name==$request->input('category')){
+        if(strtolower($category->name)==strtolower($request->input('category'))){
           $categoryExists=true; //la Categoria la categoria existe
           $product->categories()->sync($category->id);
         }
@@ -63,7 +63,6 @@ class ProductController extends Controller
     public static function delete(Request $request)
     {
       $product=Product::find($request->input('id'));
-
       $product->delete_at=date("Y-m-d ");
       $product->save();
       $saved="Se ha borrado con exito el articulo";
