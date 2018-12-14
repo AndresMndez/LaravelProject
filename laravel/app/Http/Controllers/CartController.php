@@ -34,13 +34,26 @@ class CartController extends Controller
 
     //quitar  item
     public function quitar($id){
-      session()->forget($id);
       $nombre=Category::all();
-      return redirect('cart/show',compact('nombre'));
+        session()->forget($id);
+        $productos = Product::whereIn('id', session()->get('cart'))->get();
+        return view('cart/view',compact('nombre','productos'));
+      // } else{
+        // return view('cart/defaultview',compact('nombre'));
+      // }
       //borra la clave y su valor de session
     }
 
     //actualizar
+    public function compra()
+    {
+      $cart=Cart::find($id);
+      $cart->total=0;
+      $itmes=$cart->products();
+      foreach ($items as $product) {
+        $cart->total+=$product->price;
+      }
 
+    }
 
 }
