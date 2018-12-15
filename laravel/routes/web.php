@@ -55,3 +55,4 @@ Route::get('categories/{name}','CategoryController@show');
 Route::get('categories/{name}/{product}','ProductController@show');
 Route::delete('admin/catalog','ProductController@delete');
 Route::post('admin/user/delete/{id}','UserController@delete');
+Route::post('admin/addProduct','ProductController@add');

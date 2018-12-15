@@ -1,8 +1,8 @@
-var Category=false;
-var Product=false;
-var Price=false;
-var Brand=false;
-var Avatar=true;
+var category=false;
+var product=false;
+var price=false;
+var brand=false;
+var avatar=true;
 p=document.getElementsByTagName('p');
 btn=document.getElementsByTagName('btn');
 form=document.getElementsByTagName('form');
@@ -19,8 +19,9 @@ info.onreadystatechange = function() {
 info.open("get",url,true);
 info.send();
 input['name'].onblur=function(){
+	product=false;
 	if(input['name'].value!=""){
-		Product=true;
+		product=true;
 		p["name"].innerHTML='Es un nuevo producto';
 		p["name"].style.color="green";
 		for (var i=0;i<c.length;i++){
@@ -28,7 +29,7 @@ input['name'].onblur=function(){
 				if (c[i]['products'][x]["name"]==input['name'].value){
 					p["name"].innerHTML='Dicho nombre de Producto ya existe';
 					p["name"].style.color="red";
-					Product=false;
+					product=false;
 					break;
 				}
 			}
@@ -36,11 +37,12 @@ input['name'].onblur=function(){
 	} else {
 		p["name"].innerHTML='debe poner un nombre de producto';
 		p["name"].style.color="red";
-		Product=false;
+		product=false;
 	}
 }
 
 input['price'].onblur=function(){
+	price=false;
 	if (input['price'].type!="number"){
 		p["price"].innerHTML='debes de ingresar numeros';
 		p["price"].style.color="red";
@@ -49,59 +51,61 @@ input['price'].onblur=function(){
 			p["price"].innerHTML='debes Ponerle un precio al producto';
 			p["price"].style.color="red";
 		} else {
-			Price=true;
+			price=true;
 			verify();
 			p["price"].innerHTML='Precio esta ok';
 			p["price"].style.color="green";
 		}
 	}
-
 }
 
 input['brand'].onblur=function(){
+	brand=false;
 	if(input['brand'].value==""){
 		p["brand"].innerHTML='Debes ponerle una marca al producto';
 		p["brand"].style.color="red";
 	} else {
-		Brand=true;
+		brand=true;
 		verify();
 		p["brand"].innerHTML='Le as puesto marca al producto';
 		p["brand"].style.color="green";
-
 	}
 }
 
-// input["cName"].onblur=function(){
-// 	if(input["cName"].value==""){
-// 		input["catid"].value="";
-// 		p['cName'].innerHTML="Sin Categoria";
-// 		for (var i=0;i<c.length;i++){
-// 			if (c[i]['name']==input["cName"].innerText){
-// 				input["catid"].value=c[i]['id'];
-// 				Category=true;
-// 				verify();
-// 				break;
-// 			}
-// 		}
-// 		if (Category!=true){
-// 			var a = confirm('dicha categoria no existe ¿quiere crearla?');
-// 			if(a!=true){
-// 				input["catid"].value=null;
-// 				p["cName"].innerHTML="Estas creando una nueva categoria para tus productos";
-// 				p["cName"].style.color="green";
-// 				Category=true;
-// 			}
-// 	} else {
-// 		if (input["cName"].value!=""){
-// 		input["catid"].value="";
-// 		for (var i=0;i<c.length;i++){
-// 				if (c[i]['name']==input["cName"].innerText){
-// 					input["catid"].value=c[i]['id'];
-// 					Category=true;
-// 					verify();
-// 					break;
-// 				}
-// 			}
+function blurfunc(){
+	category=false;
+	if(input["cName"].value!=""){
+		input["catid"].value="";
+		p['cName'].innerHTML="";
+		for (var i=0;i<c.length;i++){
+			if (c[i]['name']==input["cName"].value){
+				input["catid"].value=c[i]['id'];
+				p['cName'].innerHTML="Dicha categoria existe";
+				p["cName"].style.color="green";
+				category=true;
+				verify();
+				break;
+			}
+		}
+		if (!category){
+			var a = confirm('dicha categoria no existe ¿quiere crearla?');
+			if(a){
+				input["catid"].value=null;
+				p["cName"].innerHTML="Estas creando una nueva categoria para tus productos";
+				p["cName"].style.color="green";
+				category=true;
+				verify();
+			} else {
+				p['cName'].innerHTML="Cambia la categoría de tu producto";
+				p["cName"].style.color="red";
+			}
+		}
+	} else {
+		p['cName'].innerHTML="Debes de Poner una Categoría al producto";
+		p["cName"].style.color="red";
+	}
+}
+
 // 		} else {
 //
 // 			}
@@ -129,26 +133,26 @@ function avatarfunc(){
 		if (avatarsize>(5000*1024)){
 			p["avatar"].innerHTML="El archivo subido es muy grande";
 			p["avatar"].style.color="red";
-			Avatar=false;
+			avatar=false;
 		} else {
 			if (avatartype=="image/jpeg"&&avatartype=="image/webp"&&avatartype=="image/png"&&avatartype=="image/jpg"){
 				p["avatar"].innerHTML="No es un tipo de archivo jpg, png, jpeg o webp";
 				p["avatar"].style.color="red";
-				Avatar=false;
+				avatar=false;
 			} else {
 				p["avatar"].innerHTML="Esta bien el tamaño y el tipo de archivo de la imagen";
 				p["avatar"].style.color="green";
-				Avatar=true;
+				avatar=true;
 			}
 		}
 	}	else {
 		p["avatar"].innerHTML="";
-		Avatar=true;
+		avatar=true;
 	}
 }
 
 function verify(){
-	if (Product&&Category&&Brand&&Price&&Avatar){
+	if (product&&category&&brand&&price&&avatar){
 		document.getElementById("submit").removeAttribute("disabled");
 	} else {
 		document.getElementById("submit").setAttribute("disabled",true);

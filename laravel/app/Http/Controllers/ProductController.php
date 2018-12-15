@@ -19,7 +19,7 @@ class ProductController extends Controller
       $nombre=\App\Category::all();
       $category=\App\Category::where('name',$categories)->get();
       $product=\App\Product::find($productid);
-      return view('principal/productview',compact('nombre','category','product'));
+      return view('/principal/productview',compact('nombre','category','product'));
     }
 
     public static function edit(Request $request)
@@ -57,7 +57,7 @@ class ProductController extends Controller
 
       $productos = Product::whereNull('delete_at')->paginate(10);
       $saved="Se han guardado los cambios";
-  		return view('admin/products',compact('productos','saved'));
+  		return view('/admin/products',compact('productos','saved'));
     }
 
     public static function delete(Request $request)
@@ -67,7 +67,40 @@ class ProductController extends Controller
       $product->save();
       $saved="Se ha borrado con exito el articulo";
       $productos=Product::whereNull('delete_at')->paginate(10);
-      return view('admin/products',compact('productos','saved'));
+      return view('/admin/products',compact('productos','saved'));
     }
 
+    public static function add(Request $request)
+    {
+      $product=new Product;
+      $product->name=$request->input('name');
+      $product->description=$request->input('description');
+      $product->price=$request->input('price');
+      $product->brand=$request->input('brand');
+      if($request->input('cName')){
+        if(!$request->input('catid')){
+          $category=new Category(['name'=>$request->input('cName')]);
+          $category->save();
+          $category=Category::orderBy('id','DESC')->first();
+        } else {
+          $category=Category::find($request->input('catid'));
+        }
+      } else {
+        $nombre=Category::all();
+        return view('/auth/addProduct',compact('nombre'));
+      }
+      if($request->file('avatar')){
+        $file = $request->file('avatar');
+        $name=str_replace(" ","_",$product->name).".".$file->extension();
+        $folder=$request->input('cName');
+        $path=$file->storeAs($folder,$name);
+        $path="/"."storage/images/".$request->input('cName')."/$name";
+        $product->image=$path;
+      }
+
+      $product->save();
+      $product->categories()->sync($category->id);
+    $nombre=Category::all();
+    return view('/auth/addProduct',compact('nombre'));
+    }
 }

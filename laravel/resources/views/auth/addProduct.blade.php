@@ -3,9 +3,9 @@
 	{{'Add Products'}}
 @endsection
 @section('content')
-	<main>
-		<form class="" action="" enctype="multipart/form-data" style="display:flex;flex-wrap:wrap;flex-direction:column">
+		<form class="" action="/admin/addProduct" enctype="multipart/form-data" style="display:flex;flex-wrap:wrap;flex-direction:column" method='post'>
 			@csrf
+			@method('post')
 			<label for="name">Product</label>
 			<input id="name" type="text" name="name" value="">
 			<p id="name"></p>
@@ -28,7 +28,7 @@
 
 			<input id="catid" type="hidden" name="catid" value="">
 			<label for="cName">Category</label>
-			<input id="cName" type="text" name="cName" value="">
+			<input id="cName" type="text" name="cName" value="" onblur="blurfunc();">
 			<p id="cName"></p>
 
 			<button id="submit" type="submit" name="submit" value="submit" disabled>Add</button>
@@ -37,6 +37,4 @@
 		<script type="text/javascript"  src="/js/addProducts.js">
 
 		</script>
-
-	</main>
 @endsection
