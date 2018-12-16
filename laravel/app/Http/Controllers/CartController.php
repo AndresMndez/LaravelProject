@@ -47,13 +47,19 @@ class CartController extends Controller
     //actualizar
     public function compra()
     {
-      $cart=Cart::find($id);
+      $user= \Auth::user();
+      $cart=New Cart;
       $cart->total=0;
-      $itmes=$cart->products();
-      foreach ($items as $product) {
+      $productos = Product::whereIn('id', session()->get('cart'))->get();
+      foreach ($productos as $product) {
         $cart->total+=$product->price;
+        $cart->products()->syncWithoutDetaching($cart->id,$product->id);
       }
-
+      $cart->purchased=1;
+      $cart->user_id=$user->id;
+      $cart->save();
+      $cart= Cart::orderBy('id','DESC')->first();
+      dd($cart);
     }
 
 }

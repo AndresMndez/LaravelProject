@@ -11,7 +11,7 @@ class Cart extends Model
 
 	public function user()
 	{
-		return $this->belongsToOne(User::class)->withPivot('user_id');
+		return $this->belongsTo(User::class);
 	}
 
 	public function products()

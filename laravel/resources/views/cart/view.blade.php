@@ -41,5 +41,9 @@
         @endforeach
       </tbody>
     </table>
+    <form class="" action="/prueba" method="post">
+      @csrf
+      <button type="submit" name="submit">Comprar</button>
+    </form>
   </div>
 @endsection
