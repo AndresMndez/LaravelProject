@@ -14,6 +14,6 @@ class Product extends Model
 	}
 	public function carts()
 	{
-		return $this->belongsToMany(Cart::class)->withPivot('cart_id');
+		return $this->belongsToMany(Cart::class)->withPivot('precio')->withTimestamps();
 	}
 }

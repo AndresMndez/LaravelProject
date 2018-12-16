@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
 use \App\Category;
 use \App\Product;
 use \App\Cart;
@@ -50,15 +51,16 @@ class CartController extends Controller
       $user= \Auth::user();
       $cart=New Cart;
       $cart->total=0;
-      $productos = Product::whereIn('id', session()->get('cart'))->get();
-      foreach ($productos as $product) {
-        $cart->total+=$product->price;
-        $cart->products()->syncWithoutDetaching($cart->id,$product->id);
-      }
       $cart->purchased=1;
       $cart->user_id=$user->id;
       $cart->save();
       $cart= Cart::orderBy('id','DESC')->first();
+
+      $productos = Product::whereIn('id', session()->get('cart'))->get();
+      foreach ($productos as $product) {
+        $cart->total+=$product->price;
+        $cart->products()->attach( $product->id ,['precio'=>  $product->price]);
+      }
       dd($cart);
     }
 
