@@ -44,8 +44,9 @@ class AdminController extends Controller
 	public static function editor($id)
 	{
 		$product=Product::find($id);
+		$categories=Category::all();
 		// dd($product);
-		return view('admin/product/change',['product'=>$product]);
+		return view('admin/product/change',compact('product', 'categories'));
 	}
 
 	public static function editorUser($id)
