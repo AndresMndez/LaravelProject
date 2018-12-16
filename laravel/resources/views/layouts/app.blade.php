@@ -93,11 +93,15 @@
 
  </nav>
 
-  <main class="py-4">
 
+  <div class="content">
+    @include('principal/blocks/category-menu')
+
+    <main class="py-4">
       @yield('content')
-      @include('principal/blocks/category-menu')
-  </main>
+    </main>
+  </div>
+
 
   <footer>
     <div class="footer">
