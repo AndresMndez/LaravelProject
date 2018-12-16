@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('prueba',function(){return view('principal.prueba');});
+Route::post('prueba','CartController@compra');
 
 
 // API
@@ -56,3 +56,4 @@ Route::get('categories/{name}/{product}','ProductController@show');
 Route::delete('admin/catalog','ProductController@delete');
 Route::post('admin/user/delete/{id}','UserController@delete');
 Route::post('admin/addProduct','ProductController@add');
+Route::post('/cart/purchase','CartController@compra');
