@@ -21,15 +21,15 @@
         @foreach ($productos as $producto)
           <tr>
             <td>{{ $producto->name }}</td>
-            <td>{{ $producto->price }}</td>
+            <td id="price">{{ $producto->price }}</td>
             <td>
-              <select class="form-control" id="exampleFormControlSelect1">
+              <select class="form-control quantity" id="quantity">
                 @for ($i=1; $i < 6; $i++)
-                  <option>{{$i}}</option>
+                  <option value="{{$i}}">{{$i}}</option>
                 @endfor
               </select>
             </td>
-            <td>
+            <td class="finalPrice">
               {{$producto->price}}
             </td>
             <td>
@@ -47,3 +47,4 @@
     </form>
   </div>
 @endsection
+<script type="text/javascript" src="/js/carritoPlus.js"></script>

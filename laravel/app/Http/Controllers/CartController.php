@@ -16,12 +16,13 @@ class CartController extends Controller
     //mostrar carrito
 
     public function show(){
-      $nombre=Category::all();
+      $categories=Category::all();
+
       if (session()->get('cart')) {
         $productos = Product::whereIn('id', session()->get('cart'))->get();
-        return view('cart/view', compact('productos','nombre'));
+        return view('cart/view', compact('productos','categories'));
       }else{
-        return view('cart/defaultview',compact('nombre'));
+        return view('cart/defaultview',compact('categories'));
       }
     }
 
