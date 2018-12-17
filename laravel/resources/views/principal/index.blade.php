@@ -1,7 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.appHome')
 @section('title'){{'Home'}}
 @endsection
 @section('content')
+
   <h1>Mejores Ofertas</h1>
 
   <section class="best-seller">

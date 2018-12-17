@@ -26,7 +26,14 @@ class AdminController extends Controller
 	public static function catalog()
 	{
 		$productos=Product::whereNull('delete_at')->paginate(10);
-		return view('admin/products',compact('productos'));
+		$categories=Category::all();
+		return view('admin/products',compact('productos', 'categories'));
+	}
+
+	public static function index()
+	{
+		$var = 'My Admin page';
+		return view('auth/index',['var'=>$var]);
 	}
 
 	public static function users()
