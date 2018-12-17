@@ -25,8 +25,13 @@
             <td>
               <select class="form-control quantity" id="quantity">
                 @for ($i=1; $i < 6; $i++)
-                  <option value="{{$i}}">{{$i}}</option>
+                  @if ($producto->pivot->quantity==$i)
+                    <option value="{{$producto->pivot->quantity}}" selected>{{$producto->pivot->quantity}}</option>
+                  @else
+                    <option value="{{$i}}">{{$i}}</option>
+                  @endif
                 @endfor
+
               </select>
             </td>
             <td class="finalPrice">

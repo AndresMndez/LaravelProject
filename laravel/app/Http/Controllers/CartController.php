@@ -35,18 +35,25 @@ class CartController extends Controller
     //agregar item
     public function add($id)
     {
-
       if (\Auth::user()){
         $product=Product::find($id);
         $carts=Cart::all();
-
         /*Busco el carrito del usuario*/
         foreach ($carts as $cart) {
           if ($cart->user_id==\Auth::user()->id&&$cart->purchased==0){
-            $cart->products()->attach( $product->id ,['precio'=> $product->price]);
-            $productos=$cart->products()->get();
-            $categories=Category::all();
-            return view('cart/view',compact('productos','categories'));
+            $row=$cart->products()->where([['cart_id','=',$cart->id],['product_id','=', $id]])->get();
+            if($row=='[]'){
+              $cart->products()->attach( $product->id ,['precio'=> $product->price,'quantity'=>1]);
+              $productos=$cart->products()->get();
+              $categories=Category::all();
+              return view('cart/view',compact('productos','categories'));
+            } else {
+              $row[0]->pivot->quantity++;
+              $row[0]->pivot->save();
+              $productos=$cart->products()->get();
+              $categories=Category::all();
+              return view('cart/view',compact('productos','categories'));
+            }
           }
         }
         /*si no encontro un carrito no comprado*/
@@ -54,9 +61,10 @@ class CartController extends Controller
         $cart=New Cart;
         $cart->purchased=0;
         $cart->user_id=$user->id;
+        $cart->total=0;
         $cart->save();
         $cart= Cart::orderBy('id','DESC')->first();
-        $cart->products()->attach( $product->id ,['precio'=> $product->price]);
+        $cart->products->attach( $product->id ,['precio'=> $product->price,'quantity'=>1]);
         $productos=$cart->products()->get();
         $categories=Category::all();
         return view('cart/view',compact('productos','categories'));
@@ -74,18 +82,24 @@ class CartController extends Controller
         $categories=Category::all();
         foreach ($carts as $cart) {
           if ($cart->user_id==\Auth::user()->id&&$cart->purchased==0){
-            $cart->products()->detach($id ,['precio' =>$product->price]);
-            if (count($cart->products()->get())>= 1){
-              $productos=$cart->products()->get();
-              return view('cart/view',compact('productos','categories'));
-            } else {
-              return view('cart/defaultview',compact('categories'));
+            $row=$cart->products()->where([['cart_id','=',$cart->id],['product_id','=', $id]])->get();
+            if ($row!='[]'){
+              if($row[0]->pivot->quantity>1){
+                $row[0]->pivot->quantity--;
+                $row[0]->pivot->save();
+                $productos=$cart->products()->get();
+              } else {
+                $cart->products()->detach( $product->id );
+                $productos=$cart->products()->get();
+              }
             }
           }
         }
-        return view('cart/defaultview',compact('categories'));
-      } else {
-        return view('auth/login');
+        if(isset($productos)&&$productos!='[]'){
+          return view('cart/view',compact('productos','categories'));
+        } else {
+          return view('cart/defaultview',compact('categories'));
+        }
       }
     }
 
@@ -97,15 +111,23 @@ class CartController extends Controller
         $carts[0]->purchased=1;
         $carro=$carts[0]->products()->get();
         foreach ($carro as $product) {
-          $carts[0]->total+=$product->price;
+          $carts[0]->total+=($product->price)*($product->pivot->quantity);
         }
         $carts[0]->save();
-        $carts=Cart::where([['user_id','=',\Auth::user()->id],['purchased','=', 1]]);
+        $carts=Cart::where([['user_id','=',\Auth::user()->id],['purchased','=', 1]])->orderBy('id','desc')->get();
         $categories=Category::all();
         return view('/cart/compras',compact('categories','carts'));
       } else {
         return view('auth/login');
       }
     }
-
+    public function comprasRealizadas(){
+        if (\Auth::user()){
+          $carts=Cart::where([['user_id','=',\Auth::user()->id],['purchased','=', 1]])->orderBy('id','desc')->get();
+          $categories=Category::all();
+          return view('/cart/compras',compact('categories','carts'));
+        } else {
+          return view('auth/login');
+        }
+    }
 }
