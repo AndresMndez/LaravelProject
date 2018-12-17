@@ -14,7 +14,7 @@ class SeveralColumns extends Migration
     public function up()
     {
       Schema::table('carts', function (Blueprint $table) {
-        $table->integer('user_id')->nullable();
+        $table->integer('user_id')->nullable()->unsigned();
       });
     }
 
@@ -26,7 +26,7 @@ class SeveralColumns extends Migration
     public function down()
     {
       Schema::table('carts', function (Blueprint $table) {
-        $table-dropColumn('user_id');
+        $table->dropColumn('user_id');
       });
     }
 }

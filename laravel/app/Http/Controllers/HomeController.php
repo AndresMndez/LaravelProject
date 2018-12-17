@@ -22,14 +22,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-      $nombre=Category::all();
       $categories=Category::all();
       $products=Product::all()->take(4);
-      return view('principal.index',compact('categories','products','nombre'));
+      return view('principal.index',compact('categories','products'));
     }
     public function preguntas()
     {
-      $nombre=Category::all();
-      return view('principal.preguntas',compact('nombre'));
+      $categories=Category::all();
+      return view('principal.preguntas',compact('categories'));
     }
 }

@@ -16,29 +16,54 @@ class CartController extends Controller
     //mostrar carrito
 
     public function show(){
-      $nombre=Category::all();
+      $categories=Category::all();
       if (session()->get('cart')) {
         $productos = Product::whereIn('id', session()->get('cart'))->get();
-        return view('cart/view', compact('productos','nombre'));
+        return view('cart/view', compact('productos','categories'));
       }else{
-        return view('cart/defaultview',compact('nombre'));
+        return view('cart/defaultview',compact('categories'));
       }
     }
 
     //agregar item
     public function add($id){
-      session()->push('cart', $id);
-      Cart::find($id);
-      $nombre=Category::all();
-      return redirect('cart/show');
+      $product=Product::find($id);
+      if (\Auth::user()){
+        $carts=Cart::all();
+        foreach ($carts as $cart) {
+          if ($cart->user_id==\Auth::user()->id){
+            break;
+          }
+        }
+        $cart->total=($cart->total)+($product->price);
+        $cart->save();
+        $cart->products()->attach( $product->id ,['precio'=>  $product->price]);
+        $productos=$cart->products()->get();
+      } else {
+        if (session()->get('cart')){
+          $cart=Cart::find('id',session()->get('cart'))->get();
+          $cart->total=$cart->total+$product->price;
+          $cart->products()->attach( $product->id ,['precio'=>  $product->price]);
+          $productos=$cart->products()->get();
+        } else {
+          $cart=new Cart;
+          $cart->total=$product->price;
+          $cart->purchased=0;
+          $cart->save();
+          $cart->products()->attach( $product->id ,['precio'=>  $product->price]);
+          $productos[]=$cart->products()->get();
+        }
+      }
+      $categories=Category::all();
+      return view('cart/view',compact('productos','categories'));
     }
 
     //quitar  item
     public function quitar($id){
-      $nombre=Category::all();
+      $categories=Category::all();
         session()->forget($id);
         $productos = Product::whereIn('id', session()->get('cart'))->get();
-        return view('cart/view',compact('nombre','productos'));
+        return view('cart/view',compact('productos','categories'));
       // } else{
         // return view('cart/defaultview',compact('nombre'));
       // }
@@ -55,7 +80,6 @@ class CartController extends Controller
       $cart->user_id=$user->id;
       $cart->save();
       $cart= Cart::orderBy('id','DESC')->first();
-
       $productos = Product::whereIn('id', session()->get('cart'))->get();
       foreach ($productos as $product) {
         $cart->total+=$product->price;

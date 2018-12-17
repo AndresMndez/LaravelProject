@@ -16,10 +16,10 @@ class ProductController extends Controller
 
     public function show($categories,$productid)
     {
-      $nombre=\App\Category::all();
+      $categories=\App\Category::all();
       $category=\App\Category::where('name',$categories)->get();
       $product=\App\Product::find($productid);
-      return view('/principal/productview',compact('nombre','category','product'));
+      return view('/principal/productview',compact('categories','category','product'));
     }
 
     public static function edit(Request $request)
@@ -100,7 +100,7 @@ class ProductController extends Controller
 
       $product->save();
       $product->categories()->sync($category->id);
-    $nombre=Category::all();
-    return view('/auth/addProduct',compact('nombre'));
+    $categories=Category::all();
+    return view('/auth/addProduct',compact('categories'));
     }
 }
