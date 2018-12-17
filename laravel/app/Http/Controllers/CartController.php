@@ -16,76 +16,96 @@ class CartController extends Controller
     //mostrar carrito
 
     public function show(){
-      $categories=Category::all();
-      if (session()->get('cart')) {
-        $productos = Product::whereIn('id', session()->get('cart'))->get();
-        return view('cart/view', compact('productos','categories'));
-      }else{
+      if (\Auth::user()){
+        $carts=Cart::all();
+        foreach ($carts as $cart) {
+          if ($cart->user_id==\Auth::user()->id&&$cart->purchased==0){
+            $productos=$cart->products()->get();
+            $categories=Category::all();
+            return view('cart/view',compact('productos','categories'));
+          }
+        }
+        $categories=Category::all();
         return view('cart/defaultview',compact('categories'));
+      } else {
+        return view('auth/login');
       }
     }
 
     //agregar item
-    public function add($id){
-      $product=Product::find($id);
+    public function add($id)
+    {
+
       if (\Auth::user()){
+        $product=Product::find($id);
         $carts=Cart::all();
+
+        /*Busco el carrito del usuario*/
         foreach ($carts as $cart) {
-          if ($cart->user_id==\Auth::user()->id){
-            break;
+          if ($cart->user_id==\Auth::user()->id&&$cart->purchased==0){
+            $cart->products()->attach( $product->id ,['precio'=> $product->price]);
+            $productos=$cart->products()->get();
+            $categories=Category::all();
+            return view('cart/view',compact('productos','categories'));
           }
         }
-        $cart->total=($cart->total)+($product->price);
+        /*si no encontro un carrito no comprado*/
+        $user= \Auth::user();
+        $cart=New Cart;
+        $cart->purchased=0;
+        $cart->user_id=$user->id;
         $cart->save();
-        $cart->products()->attach( $product->id ,['precio'=>  $product->price]);
+        $cart= Cart::orderBy('id','DESC')->first();
+        $cart->products()->attach( $product->id ,['precio'=> $product->price]);
         $productos=$cart->products()->get();
+        $categories=Category::all();
+        return view('cart/view',compact('productos','categories'));
       } else {
-        if (session()->get('cart')){
-          $cart=Cart::find('id',session()->get('cart'))->get();
-          $cart->total=$cart->total+$product->price;
-          $cart->products()->attach( $product->id ,['precio'=>  $product->price]);
-          $productos=$cart->products()->get();
-        } else {
-          $cart=new Cart;
-          $cart->total=$product->price;
-          $cart->purchased=0;
-          $cart->save();
-          $cart->products()->attach( $product->id ,['precio'=>  $product->price]);
-          $productos[]=$cart->products()->get();
-        }
+        return view('auth/login');
       }
-      $categories=Category::all();
-      return view('cart/view',compact('productos','categories'));
     }
 
     //quitar  item
-    public function quitar($id){
-      $categories=Category::all();
-        session()->forget($id);
-        $productos = Product::whereIn('id', session()->get('cart'))->get();
-        return view('cart/view',compact('productos','categories'));
-      // } else{
-        // return view('cart/defaultview',compact('nombre'));
-      // }
-      //borra la clave y su valor de session
+    public function quitar($id)
+    {
+      if (\Auth::user()){
+        $carts=Cart::all();
+        $product=Product::find($id);
+        $categories=Category::all();
+        foreach ($carts as $cart) {
+          if ($cart->user_id==\Auth::user()->id&&$cart->purchased==0){
+            $cart->products()->detach($id ,['precio' =>$product->price]);
+            if (count($cart->products()->get())>= 1){
+              $productos=$cart->products()->get();
+              return view('cart/view',compact('productos','categories'));
+            } else {
+              return view('cart/defaultview',compact('categories'));
+            }
+          }
+        }
+        return view('cart/defaultview',compact('categories'));
+      } else {
+        return view('auth/login');
+      }
     }
 
     //actualizar
     public function compra()
     {
-      $user= \Auth::user();
-      $cart=New Cart;
-      $cart->total=0;
-      $cart->purchased=1;
-      $cart->user_id=$user->id;
-      $cart->save();
-      $cart= Cart::orderBy('id','DESC')->first();
-      $productos = Product::whereIn('id', session()->get('cart'))->get();
-      foreach ($productos as $product) {
-        $cart->total+=$product->price;
-        $cart->products()->attach( $product->id ,['precio'=>  $product->price]);
+      if (\Auth::user()){
+        $carts=Cart::where([['user_id','=',\Auth::user()->id],['purchased','=', 0]])->get();
+        $carts[0]->purchased=1;
+        $carro=$carts[0]->products()->get();
+        foreach ($carro as $product) {
+          $carts[0]->total+=$product->price;
+        }
+        $carts[0]->save();
+        $carts=Cart::where([['user_id','=',\Auth::user()->id],['purchased','=', 1]]);
+        $categories=Category::all();
+        return view('/cart/compras',compact('categories','carts'));
+      } else {
+        return view('auth/login');
       }
-      dd($cart);
     }
 
 }
