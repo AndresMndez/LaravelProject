@@ -93,6 +93,10 @@
 
  </nav>
 
+ <div class="banner">
+   <img src="/storage/images/Intel-Core-X-i5-i7-i9.jpg" alt="">
+ </div>
+
 
   <div class="content">
     @include('principal/blocks/category-menu')
