@@ -12,8 +12,7 @@ class CategoryController extends Controller
 	public static function index()
 	{
 			$categories=Category::all();
-			$nombre=$categories;
-			return view('principal/categories',compact('categories','nombre'));
+			return view('principal/categories',compact('categories'));
 	}
 
 
@@ -21,8 +20,8 @@ class CategoryController extends Controller
 	{
 			$category=Category::where('name',$name)->get();
 			$products=$category[0]->products;
-			$nombre=Category::all();
-			return view('principal/product-category',compact('category','products','nombre'));
+			$categories=Category::all();
+			return view('principal/product-category',compact('category','products','categories'));
 	}
 
 }
