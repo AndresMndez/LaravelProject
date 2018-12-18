@@ -22,7 +22,7 @@ function pregunta(){
 			verify();
 		} else {
 			is_admin=false;
-			label.innerHTML="elija 1 para admin, o 0 para clinete.";
+			label.innerHTML="elija 1 para admin, o 0 para cliente.";
 			label.style="width:230px";
 			verify();
 		}

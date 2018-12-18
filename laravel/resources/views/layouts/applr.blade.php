@@ -42,8 +42,9 @@
               <a href="mailto:Andresmndeze@gmail.com">andresmndeze@gmail.com</a>
           </div>
           <div class="searcher">
-              <form action="" method="post">
-                  <input type="text" name="product" placeholder="buscador de productos">
+              <form action="/search" method="post">
+                @csrf
+                  <input type="text" name="search" placeholder="buscador">
                   <button type="submit"><i class="fa fa-search"></i></button>
               </form>
           </div>
@@ -70,6 +71,9 @@
  		  		<li class="nav-item">
  			    	<a class="nav-link disabled" href="/logout">Logout</a>
  			  	</li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="/cart/compras">Mis carritos</a>
+          </li>
             @if (Auth::user()->is_admin)
               <li>
                 <a class="nav-link disabled" href="/admin/addProduct">Add Products</a>

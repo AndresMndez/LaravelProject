@@ -1,17 +1,17 @@
 @extends('layouts.app')
 @section('title')
-{{'Categories'}}
+{{'Categorias'}}
 @endsection
 @section('content')
-	<div	 class="container_home">
+	<div id="top"	 class="container_home">
 		<div class="containerHomeProducts">
 			<h1 class="h1_home">{{'Categories'}}</h1>
 			@foreach($categories as $category)
-				<section class="home_products">
+				<section class="home_products" id='{{$category->name}}'>
 				<h2><a href="/categories/{{$category->name}}">{{$category->name}}</a></h2>
 					@foreach ($category->products as $product)
 						<article class="main-seller">
-						@if(!$product->image)
+						@if($category==='[]')
 							<div class ="product-inside">
 								<p>No se Encuentran articulos para esta categoría</p>
 							</div>
@@ -28,6 +28,8 @@
 						@endif
 						</article>
 					@endforeach
+					<a href="#{{$category->name}}"></a>
+					<a href="#top">volver arriba</a>
 					<p class="break_line"></p>
 				</section>
 			@endforeach

@@ -10,8 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::post('prueba','CartController@compra');
+Route::post('search/','SearchController@buscarPost');
 
 
 // API

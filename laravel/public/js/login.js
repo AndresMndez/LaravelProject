@@ -56,7 +56,7 @@ password.oninput=function(){
     allowedpassword=false;
     accesserver();
   } else {
-      ppassword.innerHTML="Password is allright";
+      ppassword.innerHTML="Password is all right";
       ppassword.style.color='green';
       allowedpassword=true;
       accesserver();
