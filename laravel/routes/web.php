@@ -57,3 +57,4 @@ Route::delete('admin/catalog','ProductController@delete');
 Route::post('admin/user/delete/{id}','UserController@delete');
 Route::post('admin/addProduct','ProductController@add');
 Route::post('/cart/purchase','CartController@compra');
+Route::get('/cart/compras','CartController@comprasRealizadas');
