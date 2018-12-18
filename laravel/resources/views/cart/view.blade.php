@@ -17,20 +17,20 @@
         </tr>
       </thead>
 
-      <tbody>
+      <tbody id="tabla">
         @foreach ($productos as $producto)
           <tr>
             <td>{{ $producto->name }}</td>
             <td id="price">{{ $producto->price }}</td>
             <td>
-              <select class="form-control quantity" id="quantity">
+              <select id="quantity" class="form-control quantity" >
                 @for ($i=1; $i < 6; $i++)
                   <option value="{{$i}}">{{$i}}</option>
                 @endfor
               </select>
             </td>
-            <td class="finalPrice">
-              {{$producto->price}}
+            <td id="price2">
+
             </td>
             <td>
               <a href="/cart/borrar/{{$producto->id}}" class="">
@@ -39,6 +39,13 @@
             </td>
           </tr>
         @endforeach
+        <tr>
+          <td></td>
+          <td></td>
+          <td>total</td>
+          <td id="total"></td>
+          <td></td>
+        </tr>
       </tbody>
     </table>
     <form class="" action="/prueba" method="post">
@@ -46,5 +53,5 @@
       <button type="submit" name="submit">Comprar</button>
     </form>
   </div>
+  <script type="text/javascript" src="/js/carritoPlus.js"></script>
 @endsection
-<script type="text/javascript" src="/js/carritoPlus.js"></script>
