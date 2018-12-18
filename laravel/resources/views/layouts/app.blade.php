@@ -63,35 +63,36 @@
 
      <ul class="list-menu">
          <li><a href="/home">Home</a></li>
-         <li><a href="#">Productos</a></li>
-         <li>Ofertas</li>
-         <li>Compra</li>
-        @auth()
- 		  		<li class="nav-item">
- 			    	<a class="nav-link disabled" href="/logout">Logout</a>
- 			  	</li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="/cart/compras">Mis carritos</a>
-          </li>
-            @if (Auth::user()->is_admin)
-              <li>
-              	<a class="nav-link disabled" href="/admin/addProduct">Add Products</a>
-              </li>
-              <li>
-              	<a class="nav-link disabled" href="/admin/catalog">View All products</a>
-              </li>
-              <li>
-                <a class="nav-link disabled" href="/admin/users">View All users</a>
-              </li>
-            @endif
- 			    @else
-	        <li class="nav-item">
- 			    	<a class="nav-link disabled" href="/login">Login</a>
- 			  	</li>
-          <li class="nav-item">
-   			    	<a class="nav-link disabled" href="/register">Registrate</a>
- 			  	</li>
- 		  	@endauth
+         @auth()
+           <li class="nav-item">
+             <a class="nav-link disabled" href="/logout">Salir</a>
+           </li>
+           <li class="nav-item">
+             <a class="nav-link disabled" href="/cart/compras">Mis carritos</a>
+           </li>
+             @if (Auth::user()->is_admin)
+               <li>
+                 <a class="nav-link disabled" href="/admin/addProduct">Agregar productos</a>
+               </li>
+               <li>
+                 <a class="nav-link disabled" href="/admin/catalog">Catalogo</a>
+               </li>
+               <li>
+                 <a class="nav-link disabled" href="/admin/users">Administrar Usuarios</a>
+               </li>
+               <li>
+                 <a class="nav-link disabled" href="/admin/sales">Ver Ventas</a>
+               </li>
+             @endif
+           @else
+           <li class="nav-item">
+             <a class="nav-link disabled" href="/login">Ingresar</a>
+           </li>
+           <li class="nav-item">
+               <a class="nav-link disabled" href="/register">Registrarse</a>
+           </li>
+
+         @endauth
      </ul>
      <div class="mobile-menu"><i class = "fas fa-bars"></i></div>
 

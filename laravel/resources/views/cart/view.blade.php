@@ -13,7 +13,7 @@
           <th scope="col">Precio</th>
           <th scope="col">Cantidad</th>
           <th scope="col">Total</th>
-          <th scope="col"></th>
+          <th scope="col">Agregar/Eliminar</th>
         </tr>
       </thead>
 

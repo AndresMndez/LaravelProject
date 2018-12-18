@@ -4,22 +4,19 @@
   {{'Catalogo'}}
 @endsection
 @section('content')
-  <p style="color:green">@if(isset($saved)){{$saved}}@endif</p>
   <h1>Lista de Productos</h1>
-
-
+  <p style="color:green">@if(isset($saved)){{$saved}}@endif</p>
   <div class="table-responsive">
-
     <table class="table .table-hover table-striped table-bordered">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">Título</th>
+          <th scope="col">Producto</th>
           <th scope="col">Descripcion</th>
           <th scope="col">Marca</th>
           <th scope="col">Precio</th>
           <th scope="col">Categoria</th>
           <th scope="col">Imagenes</th>
-          <th scope="col"></th>
+          <th scope="col">Editar/Eliminar</th>
         </tr>
       </thead>
       <tbody>
