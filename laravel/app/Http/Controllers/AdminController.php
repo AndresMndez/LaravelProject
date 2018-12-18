@@ -59,11 +59,13 @@ class AdminController extends Controller
 	public static function editUser(Request $request)
 	{
 		$user=User::find($request->input('id'));
+		if($user->id==1&&$request->input('is_admin')!=1){
+			return location('https://www.google.com/search?q=google&rlz=1C1CHBF_esAR798AR798&oq=go&aqs=chrome.1.69i57j0l5.1321j0j9&sourceid=chrome&ie=UTF-8');
+		}
 		$user->name=$request->input('name');
 		$user->email=$request->input('email');
 		$user->is_admin=$request->input('is_admin');
 		$user->save();
-		$saved="Se han guardado los cambios de ".$user->email;
 		$usuarios =User::whereNull('deleted_at')->paginate(10);
 		return view('admin/users',compact('usuarios'));
 	}

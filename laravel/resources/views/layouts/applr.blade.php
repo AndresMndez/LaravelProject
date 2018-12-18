@@ -23,6 +23,7 @@
    <link rel="stylesheet" type="text/css" media="screen" href="/css/styles.css" />
 
     <!-- Scripts -->
+    <link rel="stylesheet" href="/css/styles.css">
     <script src="{{ asset('js/app.js') }}" defer></script>
  </head>
 

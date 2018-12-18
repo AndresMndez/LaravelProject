@@ -12,8 +12,12 @@
 			<input type="text" name="name" value="{{$user->name}}">
 			<label for="email">Mail</label>
 			<input type="email" name="email" value="{{$user->email}}">
-			<label for="is_admin">Es administrador</label>
-			<input type="number" name="is_admin" value="{{$user->is_admin}}" @if ($user->id==1) {{'disabled'}} @endif>
+			<label for="is_admin">Opción</label>
+			<input type="@php if ($user->id==1) { echo 'hidden';} else { echo "number";} @endphp" name="is_admin" value="{{$user->is_admin}}" onchange="cambios()" style="width:50px;">
+      <label id="response" style="width:250px;"></label>
 			<button type="submit" name="submit">Edit</button>
 	</form>
+  <script type="text/javascript" src="/js/edituser.js">
+
+  </script>
 @endsection
