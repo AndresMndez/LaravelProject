@@ -394,6 +394,11 @@ h1{
 	margin-bottom: 10px;
 }/*AQUI TERMINA EL CSS DEL MAIN*/
 
+/* CARRITO */
+
+.table-responsive{
+	margin-bottom: 40vh;
+}
 
 footer{
     background: #292929;
