@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+	<h1>{{$product->name}}</h1>
 	<article class="main-seller">
 			<img src="{{$product->image}}">
 			<div class ="product-inside">
@@ -14,7 +15,11 @@
 							<i class="fas fa-cart-plus"></i>
 							<p>Agregar al Carrito</p>
 					</a>
+			<h3 class="descriptiontitle">Descripcion del articulo</h3>
+			<p class="description">{{$product->description}}</p>
 			</div>
 	</article>
+	<script type="text/javascript">
 
+	</script>
 @endsection

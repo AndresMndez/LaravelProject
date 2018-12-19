@@ -64,7 +64,7 @@ class CartController extends Controller
         $cart->total=0;
         $cart->save();
         $cart= Cart::orderBy('id','DESC')->first();
-        $cart->products->attach( $product->id ,['precio'=> $product->price,'quantity'=>1]);
+        $cart->products()->attach( $product->id ,['precio'=> $product->price,'quantity'=>1]);
         $productos=$cart->products()->get();
         $categories=Category::all();
         return view('cart/view',compact('productos','categories'));
@@ -108,6 +108,10 @@ class CartController extends Controller
     {
       if (\Auth::user()){
         $carts=Cart::where([['user_id','=',\Auth::user()->id],['purchased','=', 0]])->get();
+        $categories=Category::all();
+        if($carts=='[]'){
+          return view('cart/defaultview',compact('categories'));
+        };
         $carts[0]->purchased=1;
         $carro=$carts[0]->products()->get();
         foreach ($carro as $product) {
@@ -115,7 +119,6 @@ class CartController extends Controller
         }
         $carts[0]->save();
         $carts=Cart::where([['user_id','=',\Auth::user()->id],['purchased','=', 1]])->orderBy('id','desc')->get();
-        $categories=Category::all();
         return view('/cart/compras',compact('categories','carts'));
       } else {
         return view('auth/login');

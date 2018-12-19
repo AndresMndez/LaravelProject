@@ -1,4 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.applr')
+@section('title')
+  {{'Verify Email'}}
+
+@endsection
 
 @section('content')
 <div class="container">

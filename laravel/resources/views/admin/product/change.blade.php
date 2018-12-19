@@ -11,17 +11,17 @@
 			<input type="hidden" name="id" value="{{$product->id}}">
 
       <div class="form-group">
-        <label for="name">Name</label>
+        <label for="name">Nombre</label>
         <input type="text" class="form-control" name="name" value="{{$product->name}}">
       </div>
 
       <div class="form-group">
-        <label for="description">Description</label>
+        <label for="description">Descripción</label>
         <input type="text" class="form-control" name="description" value="{{$product->description}}">
       </div>
 
       <div class="form-group">
-        <label for="price">Price</label>
+        <label for="price">Precio</label>
         <input type="number" class="form-control" name="price" value="{{$product->price}}">
       </div>
 
@@ -31,16 +31,16 @@
       </div>
 
       <div class="form-group">
-        <label for="brand">Brand</label>
+        <label for="brand">Marca</label>
         <input type="text" class="form-control" name="brand" value="{{$product->brand}}">
       </div>
 
       <div class="form-group">
-        <label for="category">Category</label>
+        <label for="category">Categoria</label>
         <input type="text" class="form-control" name="category" value="{{$product->categories[0]->name}}">
       </div>
 
-			<button type="submit" class="btn btn-primary" name="submit">Edit</button>
+			<button type="submit" class="btn btn-primary" name="submit">Editar</button>
 
 	</form>
 @endsection

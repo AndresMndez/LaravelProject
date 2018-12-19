@@ -11,7 +11,7 @@
           <article class="main-seller">
               <img src="{{$productos->image}}">
               <div class ="product-inside">
-              <p><a href=""><strong>{{$productos->name}}</strong></a></p>
+              <p><a href="/categories/{{$productos->categories[0]->name}}/{{$productos->id}}"><strong>{{$productos->name}}</strong></a></p>
                   <p>${{$productos->price}}</p>
                   <a href="http://127.0.0.1:8000/cart/add/{{$productos->id}}" class="product-add">
                       <i class="fas fa-cart-plus"></i>
@@ -31,11 +31,13 @@
           <article class="main-seller">
               <img src="{{$productos->image}}">
               <div class ="product-inside">
-              <p><a href=""><strong>{{$productos->name}}</strong></a></p>
+              <p><a href="/categories/{{$productos->categories[0]->name}}/{{$productos->id}}"><strong>{{$productos->name}}</strong></a></p>
                   <p>${{$productos->price}}</p>
                   <div class="product-add">
+                    <a href="http://127.0.0.1:8000/cart/add/{{$productos->id}}">
                       <i class="fas fa-cart-plus"></i>
                       <p>Agregar al Carrito</p>
+                    </a>
                   </div>
               </div>
           </article>

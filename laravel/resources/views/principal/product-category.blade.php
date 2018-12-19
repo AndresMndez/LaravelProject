@@ -8,7 +8,7 @@
 	@if ($category!='[]')
 		<h1 class="h1_home">{{$category[0]->name}}</h1>
 			<section class="home_products">
-			<h2><a href="/cateogries/{{$category[0]->name}}">{{$category[0]->name}}</a></h2>
+			<h2><a href="/categories/{{$category[0]->name}}">{{$category[0]->name}}</a></h2>
 			@if (isset($products[0]))
 				@foreach ($products as $product)
 					<article class="main-seller">
