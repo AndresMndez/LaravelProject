@@ -5,7 +5,6 @@ time=setInterval(function(){
 	if(document.readyState=='complete'){
 		clearInterval(time);
 		getPrices();
-		console.log("hola")
 	}
 },30);
 
