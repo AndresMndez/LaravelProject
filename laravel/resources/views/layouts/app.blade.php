@@ -80,9 +80,6 @@
                <li>
                  <a class="nav-link disabled" href="/admin/users">Administrar Usuarios</a>
                </li>
-               <li>
-                 <a class="nav-link disabled" href="/admin/sales">Ver Ventas</a>
-               </li>
              @endif
            @else
            <li class="nav-item">
