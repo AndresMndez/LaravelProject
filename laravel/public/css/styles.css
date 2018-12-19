@@ -330,6 +330,71 @@ h1{
     margin-bottom: 15px;
 }
 
+/* CUERPO PRINCIPAL DE PAGINA DE PREGUNTAS */
+
+.principal{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.main_preguntas{
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	align-items: center;
+	background-image: none;
+}
+
+/* CUADRO DE PREGUNTAS  */
+
+.questions {
+  margin-bottom: 1px;
+  padding: 20px;
+	margin: 0 auto;
+}
+.questions li{
+	background: #C5C6BB;
+	margin-bottom: 1px;
+	padding: 5px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.questions li:first-child{
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.questions li:last-child{
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.questions li:hover{ /*CAMBIO DE COLOR SOBRE EL MOUSE EN PREGUNTAS*/
+	background: #9B9B95;
+}
+.questions a{
+	font-size: 20px;
+}
+ /* CAJA DE RESPUESTAS */
+.answers {
+	padding: 20px;
+	margin-bottom: 10px;
+	margin: 0 auto;
+}
+.answers h2{
+	margin-bottom: 15px;
+	font-size: 1.8em;
+}
+
+.answers article{
+	margin-bottom: 10px;
+}/*AQUI TERMINA EL CSS DEL MAIN*/
+
+
 footer{
     background: #292929;
     height: 50px;
@@ -355,6 +420,25 @@ footer{
     width: 22%;
     text-align: center;
     }
+
+		/*Inicia Responsive Tablets para Main de preguntas.html*/
+		#principal_pregunta{
+			font-size: 4em;
+			align-self: flex-start;
+			margin-left: 40px;
+			background-color: inherit;
+		}
+		.questions{
+			width: 90%;
+		}
+		.questions a{
+			font-size: 1.5em;
+		}
+
+		.answers p{
+			font-size: 1em;
+		}
+		/*Finaliza Responsive Tablets para Main de preguntas.hmtl*/
 }
 
 @media (min-width: 1200px){
@@ -403,4 +487,10 @@ footer{
         width: 75%;
     }
 
+		.answers{
+			border: 1px solid #000;
+			background: #fff;
+			width: 90%;
+			border-radius: 5px;
+		}
 }

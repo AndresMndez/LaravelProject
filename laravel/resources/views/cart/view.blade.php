@@ -22,28 +22,11 @@
           <tr>
             <td>{{ $producto->name }}</td>
             <td id="price">{{ $producto->price }}</td>
-<<<<<<< HEAD
-            <td>
-              <select id="quantity" class="form-control quantity" >
-                @for ($i=1; $i < 6; $i++)
-                  @if ($producto->pivot->quantity==$i)
-                    <option value="{{$producto->pivot->quantity}}" selected>{{$producto->pivot->quantity}}</option>
-                  @else
-                    <option value="{{$i}}">{{$i}}</option>
-                  @endif
-                @endfor
-
-              </select>
-            </td>
-            <td id="price2">
-
-=======
             <td name="cantidad">
               {{$producto->pivot->quantity}}
             </td>
             <td class="finalPrice" name=price>
               {{$producto->price*$producto->pivot->quantity}}
->>>>>>> 3dc55be246ae8d85af6b3be6897811479c5b9dd4
             </td>
             <td>
               <a href="/cart/add/{{$producto->id}}" style="margin-right: : 50px;"><span class="fas fa-plus-square"></span></a>
