@@ -148,8 +148,8 @@ table {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: 50px;
     font-family: 'Roboto', sans-serif;
+		overflow: visible;
 }
 
 .visible-mobile{
@@ -158,23 +158,24 @@ table {
 }
 
 .list-menu{
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     text-align: center;
-    height: 50px;
     align-items: center;
-    display: none;
 }
 
 .list-menu li{
-    margin: 10px;
+    margin: 5px;
 }
 
 .mobile-menu {
     border: 0.5px solid #5B5654;;
     padding: 8px;
-    margin-right: 10px;
+    margin-left: 10px;
     border-radius: 5px;
+}
+.card.card-body{
+	background-color: black;
 }
 
 .banner img{
@@ -415,6 +416,7 @@ footer{
 @media (min-width: 640px){
     .list-menu{
         display: flex;
+				flex-direction: row;
     }
 
     .mobile-menu, .visible-mobile{

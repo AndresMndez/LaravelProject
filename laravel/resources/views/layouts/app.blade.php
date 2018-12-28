@@ -59,10 +59,13 @@
 
   <nav class="menu">
 
-     <p class="visible-mobile">Menu</p>
+     <div class="mobile-menu"> <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" ><i class = "fas fa-bars"></i> </a></div>
 
-     <ul class="list-menu">
-         <li><a href="/home">Home</a></li>
+     <ul class="collapse" id='collapseExample'>
+       <div class="card card-body list-menu">
+
+
+         <li class="nav-item"><a href="/home">Home</a></li>
          @auth()
            <li class="nav-item">
              <a class="nav-link disabled" href="/logout">Salir</a>
@@ -71,13 +74,13 @@
              <a class="nav-link disabled" href="/cart/compras">Mis carritos</a>
            </li>
              @if (Auth::user()->is_admin)
-               <li>
+               <li class="nav-item">
                  <a class="nav-link disabled" href="/admin/addProduct">Agregar productos</a>
                </li>
-               <li>
+               <li class="nav-item">
                  <a class="nav-link disabled" href="/admin/catalog">Catalogo</a>
                </li>
-               <li>
+               <li class="nav-item">
                  <a class="nav-link disabled" href="/admin/users">Administrar Usuarios</a>
                </li>
              @endif
@@ -90,11 +93,12 @@
            </li>
 
          @endauth
+         </div>
      </ul>
-     <div class="mobile-menu"><i class = "fas fa-bars"></i></div>
 
  </nav>
 
+ </script>
 
   <div class="content">
     @include('principal/blocks/category-menu')

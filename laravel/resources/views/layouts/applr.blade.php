@@ -59,10 +59,10 @@
   </header>
 
   <nav class="menu">
+    <div class="mobile-menu"> <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" ><i class = "fas fa-bars"></i> </a></div>
 
-     <p class="visible-mobile">Menu</p>
-
-     <ul class="list-menu">
+    <ul class="collapse" id='collapseExample'>
+      <div class="card card-body list-menu">
          <li><a href="/home">Home</a></li>
         @auth()
           <li class="nav-item">
@@ -91,8 +91,8 @@
  			  	</li>
 
  		  	@endauth
+        </div>
      </ul>
-     <div class="mobile-menu"><i class = "fas fa-bars"></i></div>
 
  </nav>
 
