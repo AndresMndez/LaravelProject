@@ -93,7 +93,7 @@
            </li>
 
          @endauth
-         </div>
+      </div>
      </ul>
 
  </nav>
