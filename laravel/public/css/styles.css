@@ -65,9 +65,20 @@ table {
     font-family: 'Montserrat', sans-serif;
     font-size: bold;
 }
+header{
+	background: #292929;
+	padding-bottom: 10px;
+}
 
 .logo p{
     font-size: 50px;
+}
+.contact{
+
+}
+
+.amount-bar{
+	background: #292929;
 }
 
 .contact-info{
@@ -119,7 +130,6 @@ table {
     margin-top: 20px;
     border: 1px solid #D0CDCC;
     border-radius: 5px;
-    margin-bottom: 15px;
 }
 .amount-bar p, .amount-bar i{
     width: 40px;
