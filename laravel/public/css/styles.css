@@ -27,6 +27,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	margin-bottom: 50px;
 }
 ol, ul {
 	list-style: none;
@@ -392,11 +393,11 @@ h1{
 
 /* CARRITO */
 
-.table-responsive{
-	margin-bottom: 40vh;
-}
 
 footer{
+		position:fixed;
+		bottom:0;
+		width:100%;
     background: #292929;
     height: 50px;
 }
