@@ -108,6 +108,7 @@
     <main class="py-4">
       @yield('content')
     </main>
+    <script type="text/javascript" src="/js/DisplayMenu.js"></script>
   </div>
 
 

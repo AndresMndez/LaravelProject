@@ -100,7 +100,7 @@
 
       @yield('content')
   </main>
-
+  <script type="text/javascript" src="/js/DisplayMenu.js"></script>
   <footer>
     <div class="footer">
       <ul class = "footer_list">

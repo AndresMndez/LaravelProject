@@ -152,11 +152,6 @@ table {
 		overflow: visible;
 }
 
-.visible-mobile{
-    color: #5B5654;
-    margin-left: 10px;
-}
-
 .list-menu{
     flex-direction: column;
     justify-content: space-between;
@@ -419,7 +414,7 @@ footer{
 				flex-direction: row;
     }
 
-    .mobile-menu, .visible-mobile{
+    .mobile-menu{
         display: none;
     }
 

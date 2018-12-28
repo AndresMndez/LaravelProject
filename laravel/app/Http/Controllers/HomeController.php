@@ -32,4 +32,8 @@ class HomeController extends Controller
       $nombre=Category::all();
       return view('principal.preguntas',compact('nombre'));
     }
+    public function firstWatch()
+    {
+      return view('principal.home');
+    }
 }

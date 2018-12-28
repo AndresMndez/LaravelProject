@@ -30,7 +30,7 @@ Route::post('admin/user/change','AdminController@editUser');
 Route::post('admin/catalog','ProductController@edit');
 //DAsHBOARD ADMINISTRADOR
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@firstwatch');
 Route::get('/home', 'HomeController@index')->name('home');
 
 //LOGIN
